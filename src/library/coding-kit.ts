@@ -1,0 +1,6 @@
+export * from "../components/blocks/coding-agent"
+export { AiChat } from "../components/blocks/ai-conversation/ai-chat"
+export type { ChatMessage } from "../components/blocks/ai-conversation/ai-chat"
+export { AiComposer } from "../components/blocks/ai-conversation/ai-composer"
+export { ModelPicker } from "../components/blocks/ai-conversation/model-picker"
+export { ThemeProvider } from "../components/theme-provider"

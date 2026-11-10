@@ -1,0 +1,181 @@
+[
+  {
+    "name": "claude",
+    "source": "https://unpkg.com/@lobehub/icons-static-svg@1.102.0/icons/claude-color.svg",
+    "sha256": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "license": "MIT",
+    "mono": false
+  },
+  {
+    "name": "codex",
+    "source": "https://unpkg.com/@lobehub/icons-static-svg@1.102.0/icons/codex.svg",
+    "sha256": "d08b4e824cd6727e89617f59e4737273ff53e44c1da849d016dd64dfd08b33e1",
+    "license": "MIT",
+    "mono": true
+  },
+  {
+    "name": "confluence",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "confluence",
+    "sha256": "af7c87acc4b8bd3fe9d1831f5c8243a1dc4849f1c83a4f04c5e753ee30238abd",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "figma",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "figma",
+    "sha256": "fd9a203fbb40cd727cc31504d662ef724ad4cc55a0620e99d29038831673a1ed",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "gemini",
+    "source": "https://unpkg.com/@lobehub/icons-static-svg@1.102.0/icons/gemini-color.svg",
+    "sha256": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "license": "MIT",
+    "mono": false
+  },
+  {
+    "name": "github",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "github-icon",
+    "sha256": "c25fe198ee965048948cb890df51aeab9d9affd16ae952a23ff6dccdbba290a3",
+    "license": "CC0-1.0",
+    "mono": true
+  },
+  {
+    "name": "gmail",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "google-gmail",
+    "sha256": "90310fde37dd67a4e94541d31850d8890c6434edc86116b57dec35622cab0fd6",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "google",
+    "source": "https://unpkg.com/@lobehub/icons-static-svg@1.102.0/icons/google-color.svg",
+    "sha256": "4e6aa8892ef15a6b431f40f2c9045979bf7e2357524e7bbb89b353cf4f32a5ac",
+    "license": "MIT",
+    "mono": false
+  },
+  {
+    "name": "google-calendar",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "google-calendar",
+    "sha256": "6272fa6185b8f274aa455927b143d1928b76b955cde5b5915184280578ce5b13",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "google-drive",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "google-drive",
+    "sha256": "86f9582da343db8bbd902836af5325efb96f472be8661f5980ab06610af74c2a",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "hubspot",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "hubspot",
+    "sha256": "05b43527fc9234ad175ab50432306d2a9ed92280ee1645444d82dbce71e48fe9",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "linear",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "linear-icon",
+    "sha256": "86c9949d75228f0729bd208857ace379e65d25e3695e56b1e4b75e09ab31bd89",
+    "license": "CC0-1.0",
+    "mono": true
+  },
+  {
+    "name": "notion",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "notion-icon",
+    "sha256": "4595fc9e0a049509cf9f442e548bbccbc83d560bcdec14972bedd1440152db89",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "openai",
+    "source": "https://unpkg.com/@lobehub/icons-static-svg@1.102.0/icons/openai.svg",
+    "sha256": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "license": "MIT",
+    "mono": true
+  },
+  {
+    "name": "postgresql",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "postgresql",
+    "sha256": "94be9d62f1b06834e62aaa76186e89905671baf3f68ce6f3729c69225c22bb99",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "retool",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "retool-icon",
+    "sha256": "b8f8e0a187fbffa2451bb0da25a3082a86c9c2edc3930e98a0e43646e5c6d146",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "salesforce",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "salesforce",
+    "sha256": "d541c1e6a2705bef4320df74509204484b58a213ad414e24ad182643df7d6d54",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "sentry",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "sentry-icon",
+    "sha256": "3f155c8a4646023c6c79026ede0d4af0f2412a45766012c4f2aaca7eac4fe35f",
+    "license": "CC0-1.0",
+    "mono": true
+  },
+  {
+    "name": "slack",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "slack-icon",
+    "sha256": "b35d0faf5b8b1c404d73e45b2f00c87442e8fcd55b568b77aca66c22f38cd085",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "stripe",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "stripe",
+    "sha256": "fb22a81ae77c0e51c1d76cfaea2cdd606bb5cb9b61bfa6d9e69a3627d6cec930",
+    "license": "CC0-1.0",
+    "mono": false
+  },
+  {
+    "name": "vercel",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "vercel-icon",
+    "sha256": "ff819a612dca1ff2fef505f77c97f6ccb8a10c4b09ee5e91d89ff93fbd224fff",
+    "license": "CC0-1.0",
+    "mono": true
+  },
+  {
+    "name": "zendesk",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "zendesk-icon",
+    "sha256": "ed9bbb370dcff69b7fe249c704a4456f23ec8e82c2da4871bf3e20c6a3a11ffb",
+    "license": "CC0-1.0",
+    "mono": true
+  },
+  {
+    "name": "zoom",
+    "source": "https://unpkg.com/@iconify-json/logos@1.2.19/icons.json",
+    "upstreamIcon": "zoom-icon",
+    "sha256": "9190035e33a3e09a09d1db6f2d8bc8e489099b38ae63af8a8c2347e770bdee1a",
+    "license": "CC0-1.0",
+    "mono": false
+  }
+]
