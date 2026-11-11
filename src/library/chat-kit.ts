@@ -1,5 +1,8 @@
 export { AiChat } from "../components/blocks/ai-conversation/ai-chat"
-export type { ChatMessage } from "../components/blocks/ai-conversation/ai-chat"
+export type {
+  ChatBranch,
+  ChatMessage,
+} from "../components/blocks/ai-conversation/ai-chat"
 export { AiComposer } from "../components/blocks/ai-conversation/ai-composer"
 export { AiAnswer } from "../components/blocks/ai-conversation/ai-answer"
 export { ModelPicker } from "../components/blocks/ai-conversation/model-picker"
@@ -13,7 +16,10 @@ export { Shimmer } from "../components/blocks/chat-elements/shimmer"
 export { Sources } from "../components/blocks/chat-elements/sources"
 export { Suggestion } from "../components/blocks/chat-elements/suggestion"
 export { FileDropzone } from "../components/blocks/chat-elements/file-dropzone"
-export { MessageBranches } from "../components/blocks/chat-elements/message-branches"
+export {
+  MessageBranches,
+  MessageBranchPicker,
+} from "../components/blocks/chat-elements/message-branches"
 export type { MessageBranch } from "../components/blocks/chat-elements/message-branches"
 export { MessageFeedback } from "../components/blocks/chat-elements/message-feedback"
 export type { MessageFeedbackValue } from "../components/blocks/chat-elements/message-feedback"

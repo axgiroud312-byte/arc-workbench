@@ -36,6 +36,7 @@ export type WorkflowNode = {
   id: string
   title: string
   status: keyof typeof statuses
+  statusLabel?: string
   dependsOn?: readonly string[]
   detail: string
 }
@@ -66,18 +67,18 @@ export function WorkflowGraph({
   return (
     <section
       aria-label="Agent 流程图"
-      className="min-w-0 overflow-hidden rounded-xl border bg-card"
+      className="@container/workflow min-w-0 overflow-hidden rounded-xl border bg-card"
     >
-      <ol className="flex flex-col gap-3 bg-muted/25 p-3 sm:p-4 md:flex-row">
+      <ol className="flex flex-col gap-3 bg-muted/25 p-3 @min-[32rem]/workflow:flex-row @min-[32rem]/workflow:p-4">
         {stages.map((stage, index) => (
           <li
             key={stage.id}
-            className="flex min-w-0 flex-1 flex-col gap-2 md:flex-row md:gap-3"
+            className="flex min-w-0 flex-1 flex-col gap-2 @min-[32rem]/workflow:flex-row @min-[32rem]/workflow:gap-3"
           >
             {index > 0 && (
               <ArrowRightIcon
                 aria-hidden="true"
-                className="ml-3 size-4 shrink-0 rotate-90 text-muted-foreground md:mt-10 md:ml-0 md:rotate-0"
+                className="ml-3 size-4 shrink-0 rotate-90 text-muted-foreground @min-[32rem]/workflow:mt-10 @min-[32rem]/workflow:ml-0 @min-[32rem]/workflow:rotate-0"
               />
             )}
             <div className="grid min-w-0 flex-1 content-start gap-2">
@@ -91,14 +92,15 @@ export function WorkflowGraph({
                     key={node.id}
                     variant="outline"
                     aria-pressed={active.id === node.id}
+                    title={node.title}
                     onClick={() => onValueChange(node.id)}
-                    className="h-auto w-full justify-start gap-2.5 p-2.5 text-start aria-pressed:border-primary aria-pressed:bg-accent"
+                    className="h-auto w-full justify-start gap-2.5 p-2.5 text-start aria-pressed:border-primary aria-pressed:bg-accent aria-pressed:ring-1 aria-pressed:ring-ring/60"
                   >
                     <Icon className={"size-4 " + color} aria-hidden="true" />
                     <span className="grid min-w-0 gap-1">
                       <span className="truncate text-sm">{node.title}</span>
                       <span className="text-xs font-normal text-muted-foreground">
-                        {label}
+                        {node.statusLabel ?? label}
                       </span>
                     </span>
                   </Button>
@@ -114,7 +116,7 @@ export function WorkflowGraph({
           <Badge
             variant={active.status === "failed" ? "destructive" : "secondary"}
           >
-            {statuses[active.status].label}
+            {active.statusLabel ?? statuses[active.status].label}
           </Badge>
         </div>
         <p className="text-sm leading-6 text-muted-foreground">

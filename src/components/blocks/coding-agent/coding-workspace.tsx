@@ -4,20 +4,18 @@ import {
   ChevronRight,
   FileCode2,
   FileDiff as FileDiffIcon,
+  FileText,
   Files,
   FlaskConical,
+  Globe,
   ListTree,
   PanelRightClose,
   SquareTerminal,
+  Workflow,
   type LucideIcon,
 } from "lucide-react"
 import { Button } from "../../ui/button"
-import {
-  Empty,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "../../ui/empty"
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from "../../ui/empty"
 import {
   Select,
   SelectContent,
@@ -31,6 +29,8 @@ import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group"
 import { Trace } from "../../ui/trace"
 import { BrandMark, StatusBadge } from "../shared"
 import { activityLabels } from "./activity-line"
+import { RunEvidenceActions } from "./agent-interaction"
+import { ArtifactPanel } from "./artifact-panel"
 import { CodeSample } from "./code-sample"
 import {
   completedCodingActivity,
@@ -46,13 +46,16 @@ import {
   getUnfinishedDependencies,
   getWorkers,
   runStates,
+  type RunArtifact,
   type RunFile,
   type RunSelection,
   type WorkspaceView,
 } from "./run-record"
+import { RunWorkflow } from "./run-workflow"
 import { Terminal } from "./terminal"
 import { TestResults } from "./test-results"
 import { ToolCall } from "./tool-call"
+import { WebPreview } from "./web-preview"
 
 type Turn = { id: string; label?: string; activity?: AgentActivity }
 const detailTabs = [
@@ -60,6 +63,9 @@ const detailTabs = [
   { id: "changes", label: "变更", title: "代码审阅", icon: FileDiffIcon },
   { id: "terminal", label: "终端", title: "命令记录", icon: SquareTerminal },
   { id: "tests", label: "测试", title: "测试结果", icon: FlaskConical },
+  { id: "web", label: "网页", title: "网页预览", icon: Globe },
+  { id: "artifacts", label: "产物", title: "生成产物", icon: FileText },
+  { id: "workflow", label: "流程", title: "Agent 流程图", icon: Workflow },
 ] as const
 
 export function CodingWorkspace({
@@ -99,7 +105,8 @@ export function CodingWorkspace({
       ? getUnfinishedDependencies(worker, workers)
       : []
   const pending = getPendingRequest(activity, worker?.id)
-  const { files, commands, testRuns } = getRunEvidence(activity, worker)
+  const evidence = getRunEvidence(activity, worker)
+  const { files, commands, testRuns, pages, artifacts } = evidence
   const changes = files.filter((entry) => entry.status !== "read")
   const selectedFile =
     files.find((entry) => entry.file.path === path) ?? files[0]
@@ -132,7 +139,7 @@ export function CodingWorkspace({
 
   return (
     <aside
-      className="coding-agent-workspace flex min-h-0 min-w-0 flex-col"
+      className="coding-agent-workspace @container/inspector flex min-h-0 min-w-0 flex-col"
       aria-label="执行工作区"
       data-view={detail ? "detail" : "overview"}
     >
@@ -293,6 +300,29 @@ export function CodingWorkspace({
                   onClick={() => onViewChange("tests")}
                 />
               </section>
+              <section
+                className="coding-inspector-group"
+                aria-label="网页与产物"
+              >
+                <InspectorLink
+                  icon={Globe}
+                  label="网页预览"
+                  value={pages.length ? pages.length + " 页" : "暂无"}
+                  onClick={() => onViewChange("web")}
+                />
+                <InspectorLink
+                  icon={FileText}
+                  label="产物"
+                  value={artifacts.length ? artifacts.length + " 项" : "暂无"}
+                  onClick={() => onViewChange("artifacts")}
+                />
+                <InspectorLink
+                  icon={Workflow}
+                  label="流程图"
+                  value={workers.length ? workers.length + " 个子任务" : "本轮"}
+                  onClick={() => onViewChange("workflow")}
+                />
+              </section>
               {selection && !worker && workers.length > 0 && (
                 <section
                   className="coding-inspector-group"
@@ -367,8 +397,11 @@ export function CodingWorkspace({
             className="coding-detail-tabs w-full shrink-0 px-2"
           >
             {detailTabs.map(({ id, label, icon: Icon }) => (
-              <TabsTrigger key={id} value={id}>
-                <Icon data-icon="inline-start" />
+              <TabsTrigger key={id} value={id} className="text-xs">
+                <Icon
+                  data-icon="inline-start"
+                  className="hidden @min-[27rem]/inspector:block"
+                />
                 {label}
               </TabsTrigger>
             ))}
@@ -459,9 +492,107 @@ export function CodingWorkspace({
               <WorkspaceEmpty icon={FlaskConical} title="暂无测试结果" />
             )}
           </TabsContent>
+          <TabsContent
+            value="web"
+            className="min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4"
+          >
+            {pages.length ? (
+              <WebPreview key={scopeKey} pages={pages} />
+            ) : (
+              <WorkspaceEmpty
+                icon={Globe}
+                title={worker ? "此子任务暂无网页预览" : "本轮暂无网页预览"}
+              />
+            )}
+          </TabsContent>
+          <TabsContent
+            value="artifacts"
+            className="min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4"
+          >
+            {artifacts.length ? (
+              <RunArtifacts key={scopeKey} artifacts={artifacts} />
+            ) : (
+              <WorkspaceEmpty
+                icon={FileText}
+                title={worker ? "此子任务暂无产物" : "本轮暂无产物"}
+              />
+            )}
+          </TabsContent>
+          <TabsContent
+            value="workflow"
+            className="min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4"
+          >
+            {activity && selection ? (
+              <div className="grid min-w-0 gap-3">
+                <RunWorkflow
+                  activity={activity}
+                  selection={selection}
+                  onInspect={onInspect}
+                />
+                <RunEvidenceActions
+                  evidence={evidence}
+                  onInspect={onViewChange}
+                />
+              </div>
+            ) : (
+              <WorkspaceEmpty icon={Workflow} title="本轮暂无流程记录" />
+            )}
+          </TabsContent>
         </Tabs>
       )}
     </aside>
+  )
+}
+
+function RunArtifacts({ artifacts }: { artifacts: readonly RunArtifact[] }) {
+  const [activeId, setActiveId] = useState<string>()
+  const artifact =
+    artifacts.find((item) => item.id === activeId) ?? artifacts[0]
+  if (!artifact) return null
+  const preview =
+    artifact.summary || artifact.items?.length ? (
+      <article className="grid min-w-0 gap-3">
+        {artifact.summary && (
+          <p className="text-sm leading-6">{artifact.summary}</p>
+        )}
+        {artifact.items && (
+          <dl className="divide-y">
+            {artifact.items.map(({ label, value }, index) => (
+              <div
+                key={label + "/" + index}
+                className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-3 py-2 text-xs leading-5"
+              >
+                <dt className="wrap-break-word text-muted-foreground">
+                  {label}
+                </dt>
+                <dd className="wrap-break-word">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </article>
+    ) : undefined
+  return (
+    <div className="grid min-w-0 gap-3">
+      {artifacts.length > 1 && (
+        <Select<string>
+          value={artifact.id}
+          onValueChange={(id) => setActiveId(id ?? undefined)}
+        >
+          <SelectTrigger aria-label="选择产物" size="sm" className="max-w-full">
+            <SelectValue>{artifact.filename}</SelectValue>
+          </SelectTrigger>
+          <SelectContent align="start" alignItemWithTrigger={false}>
+            {artifacts.map((item) => (
+              <SelectItem key={item.id} value={item.id}>
+                {item.filename}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
+      <ArtifactPanel key={artifact.id} artifact={{ ...artifact, preview }} />
+    </div>
   )
 }
 

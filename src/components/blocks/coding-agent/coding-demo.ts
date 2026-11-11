@@ -4,12 +4,14 @@ import type { ReasoningStep } from "./reasoning-steps"
 import type {
   RunApproval,
   RunFile,
+  RunOutputs,
   RunQuestion,
   RunRequest,
 } from "./run-record"
 import type { SubagentCallData } from "./subagent-call"
 import type { TestRun } from "./test-results"
 import type { ToolCallData } from "./tool-call"
+import { runReport, testRunOutput } from "./run-output"
 
 type ToolAction = ToolCallData & { kind: "tool" }
 type SubagentAction = SubagentCallData & { kind: "subagent" }
@@ -19,6 +21,7 @@ export type AgentActivity = {
   actions: (ToolAction | SubagentAction)[]
   requests?: RunRequest[]
   endState?: "stopped" | "error"
+  outputs?: RunOutputs
 }
 
 export const codingDemoTitle = "修复回车误发送"
@@ -146,6 +149,18 @@ const diagnose: SubagentAction = {
   tools: [readInput, reproduce],
   files: [{ file: demoFiles[0], status: "read" }],
   testRuns: [baselineRun],
+  outputs: runReport({
+    id: "ime-reproduction",
+    title: "输入法误发送复现",
+    filename: "ime-reproduction.md",
+    path: "/checks/ime-reproduction",
+    summary: "组字期间按回车会进入消息提交逻辑。",
+    items: [
+      { label: "触发动作", value: "中文输入法选字时按回车" },
+      { label: "预期", value: "确认选字，提交 0 次" },
+      { label: "实际", value: "提交 1 次" },
+    ],
+  }),
   result: "组字期间也进入了发送逻辑，需要在提交前检查输入法状态。",
   duration: "1.2 秒",
 }
@@ -276,6 +291,38 @@ function finishedWorker(imeOnly: boolean, failure?: string): SubagentAction {
     files: runFiles("changed"),
     tools: [readTests, patch, command],
     testRuns: [run],
+    outputs: testRunOutput(run),
+  }
+}
+
+function verifiedActivity(
+  imeOnly: boolean,
+  requests: RunRequest[],
+  failure?: string
+): AgentActivity {
+  return {
+    steps: stageSteps("done", failure ? "error" : "done", "done", failure),
+    actions: [search, diagnose, finishedWorker(imeOnly, failure)],
+    requests,
+    endState: failure ? "error" : undefined,
+    outputs: runReport({
+      id: imeOnly ? "ime-validation" : "keyboard-validation",
+      title: imeOnly ? "输入法选字验证" : "回车交互验证",
+      filename: imeOnly ? "ime-validation.md" : "keyboard-validation.md",
+      path: imeOnly ? "/preview/ime" : "/preview/chat-input",
+      summary: failure ?? "示例改动已应用。按回车时会先检查输入法状态。",
+      items: [
+        {
+          label: "验证范围",
+          value: imeOnly ? "输入法选字" : "选字、发送和换行",
+        },
+        { label: "文件改动", value: "输入框和回归测试" },
+        {
+          label: "测试结果",
+          value: failure ? "1 项失败" : imeOnly ? "1 项通过" : "3 项通过",
+        },
+      ],
+    }),
   }
 }
 
@@ -290,16 +337,20 @@ export const inspectedCodingActivity: AgentActivity = {
   ],
   actions: [search, diagnose],
 }
-export const completedCodingActivity: AgentActivity = {
-  steps: stageSteps("done", "done", "done"),
-  actions: [search, diagnose, finishedWorker(false)],
-  requests: [
-    { ...coverageQuestion, status: "answered", answer: "all" },
-    { ...writeRequest, status: "approved" },
-  ],
-}
+export const completedCodingActivity = verifiedActivity(false, [
+  { ...coverageQuestion, status: "answered", answer: "all" },
+  { ...writeRequest, status: "approved" },
+])
 export const codingDemoReply =
   "已应用两处示例改动。组字时按回车会先确认选字，普通回车仍可发送，Shift + Enter 保留换行。\n\n三项回归测试通过。"
+
+export const imeOnlyCodingFrame = {
+  activity: verifiedActivity(true, [
+    { ...coverageQuestion, status: "answered", answer: "ime" },
+    { ...writeRequest, status: "approved" },
+  ]),
+  content: verificationReply(true),
+}
 
 const inspectingActivity: AgentActivity = {
   steps: stageSteps("running", "pending"),
@@ -313,6 +364,7 @@ const inspectingActivity: AgentActivity = {
       tools: [runningTool(readInput)],
       files: [],
       testRuns: [],
+      outputs: undefined,
     },
     { ...tests, tools: [runningTool(readTests)], files: [] },
   ],
@@ -429,12 +481,11 @@ export function codingPreviewFrame(state: CodingPreviewState): {
       return { activity: awaitingWriteActivity([allCoverage]), content: "" }
     case "error":
       return {
-        activity: {
-          steps: stageSteps("done", "error", "done", failedRegression),
-          actions: [search, diagnose, finishedWorker(false, failedRegression)],
-          requests: [allCoverage, approvedWrite],
-          endState: "error",
-        },
+        activity: verifiedActivity(
+          false,
+          [allCoverage, approvedWrite],
+          failedRegression
+        ),
         content:
           "示例改动已应用。回归测试有一项失败，可以在右栏查看失败详情和命令输出。",
       }
@@ -478,11 +529,7 @@ export function respondToCodingPreview(
     (request) => request.kind === "question" && request.answer === "ime"
   )
   return {
-    activity: {
-      steps: stageSteps("done", "done", "done"),
-      actions: [search, diagnose, finishedWorker(imeOnly)],
-      requests: resolved,
-    },
+    activity: verifiedActivity(imeOnly, resolved),
     content: verificationReply(imeOnly),
   }
 }
@@ -548,23 +595,18 @@ export async function* streamCodingDemo(
   yield { activity: verifyingActivity(imeOnly, requests), content: "" }
   await pause(640, signal)
   if (signal.aborted) return
-  const actions = [search, diagnose, finishedWorker(imeOnly)]
+  const activity = verifiedActivity(imeOnly, requests)
   yield {
     activity: {
+      ...activity,
       steps: stageSteps("done", "done", "running"),
-      actions,
-      requests,
+      outputs: undefined,
     },
     content: "",
   }
   await pause(320, signal)
   if (signal.aborted) return
 
-  const activity = {
-    steps: stageSteps("done", "done", "done"),
-    actions,
-    requests,
-  }
   const result = verificationReply(imeOnly)
   const answer = /输入法|回车|快捷键|enter|ime/i.test(prompt)
     ? result

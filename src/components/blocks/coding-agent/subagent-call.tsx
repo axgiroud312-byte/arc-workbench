@@ -16,7 +16,7 @@ import {
 import { BrandMark, type BrandName } from "../shared"
 import { ActivityLine, type ActivityStatus } from "./activity-line"
 import { ToolCall, type ToolCallData } from "./tool-call"
-import type { RunFile } from "./run-record"
+import type { RunFile, RunOutputs } from "./run-record"
 import type { TestRun } from "./test-results"
 
 export type SubagentCallData = {
@@ -29,6 +29,7 @@ export type SubagentCallData = {
   tools?: ToolCallData[]
   files?: RunFile[]
   testRuns?: TestRun[]
+  outputs?: RunOutputs
   note?: string
   result?: string
   duration?: string

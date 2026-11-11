@@ -10,7 +10,12 @@ import {
   SheetTrigger,
 } from "../../ui/sheet"
 import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group"
-import { AiChat, type ChatSummary } from "../ai-conversation/ai-chat"
+import {
+  AiChat,
+  originalChatBranchId,
+  type ChatBranch,
+  type ChatSummary,
+} from "../ai-conversation/ai-chat"
 import { StatusBadge } from "../shared"
 import {
   completedCodingActivity,
@@ -19,6 +24,7 @@ import {
   codingDemoTitle,
   codingPreviewFrame,
   codingPreviewStates,
+  imeOnlyCodingFrame,
   inspectedCodingActivity,
   type CodingPreviewState,
 } from "./coding-demo"
@@ -90,6 +96,22 @@ const exampleSession: Session = {
     },
   ],
 }
+const exampleBranches: ChatBranch[] = [
+  {
+    id: "ime-only",
+    title: "仅验证输入法",
+    messages: [
+      ...investigation,
+      { id: "ime-fix", role: "user", content: "修复后只验证中文输入法选字。" },
+      {
+        id: "ime-fix-result",
+        role: "assistant",
+        model: "sonnet",
+        ...imeOnlyCodingFrame,
+      },
+    ],
+  },
+]
 const exampleSessions: Session[] = [
   exampleSession,
   {
@@ -169,6 +191,10 @@ function sidebarSummary(session: Session): SessionSummary {
     status,
     detail: worker?.title,
   }
+}
+
+function conversationScope(sessionId: string, branchId = originalChatBranchId) {
+  return sessionId + "/" + branchId
 }
 
 export function CodingAgentPanel() {
@@ -286,7 +312,7 @@ function CodingWorkbench({
     (): Record<string, RunSelection> => {
       const initial = multiScene && multiAgentSelection(multiScene)
       return initial && initial.workerId
-        ? { [orchestrationSessionId]: initial }
+        ? { [conversationScope(orchestrationSessionId)]: initial }
         : {}
     }
   )
@@ -321,6 +347,7 @@ function CodingWorkbench({
     : sessions
   const session =
     visibleSessions.find((item) => item.id === activeId) ?? exampleSession
+  const scope = conversationScope(session.id, session.branchId)
   const latestActivity = session.messages.at(-1)?.activity
   const state = getRunState(latestActivity, undefined, session.running)
   const status = runStates[state]
@@ -335,8 +362,9 @@ function CodingWorkbench({
     ]
   })
   const latest = turns.at(-1)
-  const inspection = inspections[activeId]
-  const turn = turns.find((item) => item.id === inspection?.turnId) ?? latest
+  const inspection = inspections[scope]
+  const inspectedTurn = turns.find((item) => item.id === inspection?.turnId)
+  const turn = inspectedTurn ?? latest
   const worker = getWorkers(turn?.activity).find(
     (item) => item.id === inspection?.workerId
   )
@@ -375,7 +403,7 @@ function CodingWorkbench({
   }
 
   function inspect(next: RunSelection, nextView?: WorkspaceView) {
-    setInspections((current) => ({ ...current, [activeId]: next }))
+    setInspections((current) => ({ ...current, [scope]: next }))
     if (nextView) setView(nextView)
     dispatch("open-inspector")
   }
@@ -387,7 +415,7 @@ function CodingWorkbench({
   function followLatest() {
     setInspections((current) => {
       const next = { ...current }
-      delete next[activeId]
+      delete next[scope]
       return next
     })
   }
@@ -522,6 +550,7 @@ function CodingWorkbench({
                   id === orchestrationSessionId && orchestration
                     ? {
                         messages,
+                        running: orchestrationSession?.running,
                         onRetryWorker: (workerId) => {
                           if (orchestration.retry(workerId))
                             inspect({ turnId: multiAgentTurnId, workerId })
@@ -531,6 +560,14 @@ function CodingWorkbench({
                 }
                 previewPaused={previewPaused && id === exampleSession.id}
                 initialMessages={messages}
+                initialBranchTitle={
+                  id === exampleSession.id ? "完整验证" : undefined
+                }
+                initialBranches={
+                  !preview && id === exampleSession.id
+                    ? exampleBranches
+                    : undefined
+                }
                 initialTitle={title}
                 initialModel={model}
                 sessionId={id}
@@ -558,11 +595,11 @@ function CodingWorkbench({
         </div>
       </div>
       <CodingWorkspace
-        sessionId={session.id}
+        sessionId={scope}
         turns={turns}
         selection={selection}
         view={view}
-        followingLatest={!inspection}
+        followingLatest={!inspectedTurn}
         onInspect={inspect}
         onViewChange={setView}
         onFollowLatest={followLatest}

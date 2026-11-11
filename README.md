@@ -9,8 +9,8 @@
 在已初始化 shadcn Base UI 的 React 19 + Tailwind CSS 4 项目中，按需安装单件或组合包。
 
 ```sh
-npx shadcn@latest add axgiroud312-byte/arc-workbench/coding-kit#v0.2.0
-npx shadcn@latest add axgiroud312-byte/arc-workbench/ui/data-table#v0.2.0
+npx shadcn@latest add axgiroud312-byte/arc-workbench/coding-kit#v0.3.0
+npx shadcn@latest add axgiroud312-byte/arc-workbench/ui/data-table#v0.3.0
 npx shadcn@latest list axgiroud312-byte/arc-workbench
 ```
 
@@ -43,7 +43,7 @@ export default function Example() {
 | `coding-kit` | 完整编程工作台、子 Agent 编排、文件与测试、审批、网页和产物预览 |
 | `agent-kit` | 运行、任务、流程图、审批、服务、知识库和评测 |
 
-66 个业务组件和本版新增的 27 个基础件都有独立中文预览、安装命令和使用示例。基础件可通过 `ui/button`、`ui/data-table`、`ui/date-picker` 等名称单独安装。
+66 个业务组件和 27 个基础件有独立中文预览、安装命令和使用示例。基础件可通过 `ui/button`、`ui/data-table`、`ui/date-picker` 等名称单独安装。
 
 ## 组件来源
 
@@ -65,13 +65,15 @@ npm run dev
 
 ## 编程工作台预览
 
-打开[编程工作台](https://axgiroud312-byte.github.io/arc-workbench/?embed=coding-agent-panel)。左边按项目找会话，筛选菜单可只看待处理或执行中的会话。右边默认显示执行概览，点文件进入更宽的审阅区。点对话中的轮次或子任务会改变右栏的范围。设置有独立导航，返回工作台后恢复原来查看的轮次、子任务和文件。
+打开[编程工作台](https://axgiroud312-byte.github.io/arc-workbench/?embed=coding-agent-panel)。在主对话顶部，用「对话分支」的左右箭头切换完整验证和仅验证输入法。编辑已发送的消息后再发送，或点回复下方的「重新生成回答」，会创建新分支。点赞或提交反馈后，切回这条回复仍能看到记录。
+
+点击对话里的轮次或子任务，右栏会切换到它的文件、命令、测试、网页和产物。打开「流程图」后可点击主 Agent、子任务或前置节点，查看对应状态和详情。左边按项目找会话，从设置页返回时会恢复当前分支和查看位置。
 
 发送一条消息可体验并行委派、选择测试范围和写入审批。批准会应用示例改动并继续测试。拒绝或停止会保留已经完成的排查。对话、侧栏和右栏从同一轮执行记录读取状态。
 
 顶部「状态预览」可以直接切换执行中、待回答、待审批、执行失败和已停止。每个状态都可以检查子任务和执行记录，点「正常对话」回到原来的会话。
 
-顶部「多子 Agent 编排」和[独立预览](https://axgiroud312-byte.github.io/arc-workbench/?embed=multi-agent-orchestration)都能切换并行执行、等待前置任务和单个子 Agent 失败。点子任务查看它的记录，点失败任务旁的「重试」会追加一次执行，并保留之前的失败日志。
+顶部「多子 Agent 编排」和[独立预览](https://axgiroud312-byte.github.io/arc-workbench/?embed=multi-agent-orchestration)都能切换并行执行、等待前置任务和单个子 Agent 失败。点失败任务旁的「重试」会追加一次执行，之前的失败日志和报告仍可查看。
 
 | 参考 | 用在工作台里 |
 | --- | --- |

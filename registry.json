@@ -675,6 +675,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-orchestration.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -693,6 +698,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -800,6 +810,11 @@
           "target": "@components/arc-workbench/components/ui/radio-group.tsx"
         },
         {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
+        },
+        {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/separator.tsx"
@@ -856,7 +871,7 @@
       "name": "coding-kit",
       "type": "registry:item",
       "title": "编程工作台套件",
-      "description": "编程工作台、子 Agent 编排、审批、文件、命令、测试和产物预览。",
+      "description": "编程工作台、对话分支、审批、子 Agent 流程、执行记录和产物预览。",
       "categories": [
         "组合套件"
       ],
@@ -1004,6 +1019,11 @@
           "target": "@components/arc-workbench/assets/brands/zoom.svg"
         },
         {
+          "path": "src/components/blocks/agents/workflow-graph.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/agents/workflow-graph.tsx"
+        },
+        {
           "path": "src/components/blocks/ai-conversation/ai-chat.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/ai-conversation/ai-chat.tsx"
@@ -1032,6 +1052,16 @@
           "path": "src/components/blocks/chat-elements/attachments.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/chat-elements/attachments.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/message-branches.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-branches.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/message-feedback.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-feedback.tsx"
         },
         {
           "path": "src/components/blocks/chat-elements/plan.tsx",
@@ -1134,9 +1164,19 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-orchestration.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/run-workflow.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-workflow.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/subagent-call.tsx",
@@ -1214,6 +1254,11 @@
           "target": "@components/arc-workbench/components/ui/collapsible.tsx"
         },
         {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
           "path": "src/components/ui/dropdown-menu.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/dropdown-menu.tsx"
@@ -1262,6 +1307,11 @@
           "path": "src/components/ui/questionnaire.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
         },
         {
           "path": "src/components/ui/select.tsx",
@@ -2425,6 +2475,16 @@
           "target": "@components/arc-workbench/components/blocks/chat-elements/attachments.tsx"
         },
         {
+          "path": "src/components/blocks/chat-elements/message-branches.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-branches.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/message-feedback.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-feedback.tsx"
+        },
+        {
           "path": "src/components/blocks/chat-elements/plan.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/chat-elements/plan.tsx"
@@ -2480,6 +2540,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-orchestration.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -2498,6 +2563,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -2545,6 +2615,11 @@
           "target": "@components/arc-workbench/components/ui/collapsible.tsx"
         },
         {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
           "path": "src/components/ui/dropdown-menu.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/dropdown-menu.tsx"
@@ -2578,6 +2653,16 @@
           "path": "src/components/ui/questionnaire.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
+        },
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
         },
         {
           "path": "src/components/ui/separator.tsx",
@@ -4215,6 +4300,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/reasoning-steps.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -4233,6 +4323,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -4275,9 +4370,24 @@
           "target": "@components/arc-workbench/components/ui/item.tsx"
         },
         {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
+        },
+        {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/separator.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle.tsx"
         },
         {
           "path": "src/components/ui/trace.tsx",
@@ -4540,6 +4650,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/reasoning-steps.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -4558,6 +4673,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -4598,6 +4718,11 @@
           "path": "src/components/ui/item.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/item.tsx"
+        },
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
         },
         {
           "path": "src/components/ui/separator.tsx",
@@ -4725,6 +4850,7 @@
       ],
       "dependencies": [
         "@base-ui/react@^1.9.0",
+        "@shadcn/react@^0.3.1",
         "class-variance-authority@^0.7.1",
         "cn@^0.5.2",
         "lucide-react@^1.70.0"
@@ -4861,6 +4987,11 @@
           "target": "@components/arc-workbench/assets/brands/zoom.svg"
         },
         {
+          "path": "src/components/blocks/agents/workflow-graph.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/agents/workflow-graph.tsx"
+        },
+        {
           "path": "src/components/blocks/chat-elements/plan.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/chat-elements/plan.tsx"
@@ -4869,6 +5000,16 @@
           "path": "src/components/blocks/coding-agent/activity-line.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/activity-line.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/agent-interaction.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/agent-interaction.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/artifact-panel.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/artifact-panel.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/code-sample.tsx",
@@ -4931,9 +5072,19 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-orchestration.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/run-workflow.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-workflow.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/subagent-call.tsx",
@@ -4954,6 +5105,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -4999,6 +5155,11 @@
           "path": "src/components/ui/item.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/item.tsx"
+        },
+        {
+          "path": "src/components/ui/questionnaire.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
         },
         {
           "path": "src/components/ui/select.tsx",
@@ -5230,6 +5391,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/reasoning-steps.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -5248,6 +5414,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -5295,9 +5466,24 @@
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
         },
         {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
+        },
+        {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/separator.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle.tsx"
         },
         {
           "path": "src/components/ui/trace.tsx",
@@ -5321,12 +5507,13 @@
       "name": "coding-workspace",
       "type": "registry:block",
       "title": "执行工作区",
-      "description": "按轮次或子任务查看文件、变更、终端和测试。",
+      "description": "按轮次或子任务查看文件、命令、测试、网页、产物和流程图。",
       "categories": [
         "编程与执行"
       ],
       "dependencies": [
         "@base-ui/react@^1.9.0",
+        "@shadcn/react@^0.3.1",
         "class-variance-authority@^0.7.1",
         "cn@^0.5.2",
         "lucide-react@^1.70.0"
@@ -5463,9 +5650,24 @@
           "target": "@components/arc-workbench/assets/brands/zoom.svg"
         },
         {
+          "path": "src/components/blocks/agents/workflow-graph.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/agents/workflow-graph.tsx"
+        },
+        {
           "path": "src/components/blocks/coding-agent/activity-line.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/activity-line.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/agent-interaction.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/agent-interaction.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/artifact-panel.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/artifact-panel.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/code-sample.tsx",
@@ -5508,9 +5710,19 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/reasoning-steps.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/run-workflow.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-workflow.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/subagent-call.tsx",
@@ -5531,6 +5743,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -5576,6 +5793,11 @@
           "path": "src/components/ui/item.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/item.tsx"
+        },
+        {
+          "path": "src/components/ui/questionnaire.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
         },
         {
           "path": "src/components/ui/select.tsx",
@@ -5624,7 +5846,7 @@
       "name": "coding-agent-panel",
       "type": "registry:block",
       "title": "编程工作台",
-      "description": "在对话中查看编排、委派和审批，右栏按轮次或子任务查看执行记录。",
+      "description": "切换对话分支、评价回复，按轮次或子任务查看执行记录、网页和产物。",
       "categories": [
         "编程与执行"
       ],
@@ -5772,6 +5994,11 @@
           "target": "@components/arc-workbench/assets/brands/zoom.svg"
         },
         {
+          "path": "src/components/blocks/agents/workflow-graph.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/agents/workflow-graph.tsx"
+        },
+        {
           "path": "src/components/blocks/ai-conversation/ai-chat.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/ai-conversation/ai-chat.tsx"
@@ -5797,6 +6024,16 @@
           "target": "@components/arc-workbench/components/blocks/chat-elements/attachments.tsx"
         },
         {
+          "path": "src/components/blocks/chat-elements/message-branches.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-branches.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/message-feedback.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-feedback.tsx"
+        },
+        {
           "path": "src/components/blocks/chat-elements/plan.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/chat-elements/plan.tsx"
@@ -5810,6 +6047,11 @@
           "path": "src/components/blocks/coding-agent/agent-interaction.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/agent-interaction.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/artifact-panel.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/artifact-panel.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/code-sample.tsx",
@@ -5887,9 +6129,19 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-orchestration.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/run-workflow.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-workflow.tsx"
         },
         {
           "path": "src/components/blocks/coding-agent/subagent-call.tsx",
@@ -5910,6 +6162,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -5962,6 +6219,11 @@
           "target": "@components/arc-workbench/components/ui/collapsible.tsx"
         },
         {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
           "path": "src/components/ui/dropdown-menu.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/dropdown-menu.tsx"
@@ -6010,6 +6272,11 @@
           "path": "src/components/ui/questionnaire.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
         },
         {
           "path": "src/components/ui/select.tsx",
@@ -6572,6 +6839,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/reasoning-steps.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -6590,6 +6862,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -6647,6 +6924,11 @@
           "target": "@components/arc-workbench/components/ui/item.tsx"
         },
         {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
+        },
+        {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/separator.tsx"
@@ -6670,6 +6952,16 @@
           "path": "src/components/ui/textarea.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/textarea.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle.tsx"
         },
         {
           "path": "src/components/ui/tooltip.tsx",
@@ -7158,6 +7450,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/reasoning-steps.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/run-output.ts",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/run-output.ts"
+        },
+        {
           "path": "src/components/blocks/coding-agent/run-record.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/run-record.ts"
@@ -7176,6 +7473,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -7218,6 +7520,11 @@
           "target": "@components/arc-workbench/components/ui/item.tsx"
         },
         {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
+        },
+        {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/separator.tsx"
@@ -7226,6 +7533,16 @@
           "path": "src/components/ui/sheet.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/sheet.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle.tsx"
         },
         {
           "path": "src/components/ui/trace.tsx",

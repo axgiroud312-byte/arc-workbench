@@ -346,7 +346,7 @@ const definitions: readonly BlockEntry[] = [
     "CodingWorkspace",
     "Coding",
     "coding-agent",
-    "按轮次或子任务查看文件、变更、终端和测试。",
+    "按轮次或子任务查看文件、命令、测试、网页、产物和流程图。",
     {
       demo: "CodingWorkspaceDemo",
       useDemo: true,
@@ -359,7 +359,7 @@ const definitions: readonly BlockEntry[] = [
     "CodingAgentPanel",
     "Coding",
     "coding-agent",
-    "在对话中查看编排、委派和审批，右栏按轮次或子任务查看执行记录。",
+    "切换对话分支、评价回复，按轮次或子任务查看执行记录、网页和产物。",
   ],
   ...addedPreviews.map(
     ([
@@ -796,7 +796,7 @@ export const libraryKits = [
     id: "coding-kit",
     title: "编程工作台套件",
     description:
-      "编程工作台、子 Agent 编排、审批、文件、命令、测试和产物预览。",
+      "编程工作台、对话分支、审批、子 Agent 流程、执行记录和产物预览。",
     entry: "src/library/coding-kit.ts",
     preview: "coding-agent-panel",
   },

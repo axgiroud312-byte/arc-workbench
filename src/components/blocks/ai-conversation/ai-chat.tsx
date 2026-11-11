@@ -3,6 +3,7 @@ import {
   ArrowDown,
   ChevronDown,
   FileCode2,
+  GitBranch,
   PanelRight,
   Pencil,
   Plus,
@@ -36,6 +37,11 @@ import {
 } from "../../ui/dropdown-menu"
 import { BrandMark } from "../shared"
 import { Attachments } from "../chat-elements/attachments"
+import { MessageBranchPicker } from "../chat-elements/message-branches"
+import {
+  MessageFeedback,
+  type MessageFeedbackValue,
+} from "../chat-elements/message-feedback"
 import {
   ComposerInput,
   type ComposerSubmission,
@@ -87,12 +93,27 @@ export type ChatSummary = {
   model: string
   messages: ChatMessage[]
   running: boolean
+  branchId?: string
+}
+
+export type ChatBranch = {
+  id: string
+  title: string
+  messages: ChatMessage[]
+}
+
+type ChatBranchState = ChatBranch & {
+  running?: boolean
+  draft?: { text: string; editId?: string }
 }
 
 type OrchestrationTranscript = {
   messages: ChatMessage[]
+  running?: boolean
   onRetryWorker: (workerId: string) => void
 }
+
+export const originalChatBranchId = "original"
 
 type ActiveReply = {
   id: string
@@ -118,6 +139,8 @@ const initialMessages: ChatMessage[] = [
 
 export function AiChat({
   initialMessages: supplied,
+  initialBranches,
+  initialBranchTitle = "原始分支",
   initialTitle = codingDemoTitle,
   initialModel = "sonnet",
   sessionId,
@@ -137,6 +160,8 @@ export function AiChat({
   className,
 }: {
   initialMessages?: ChatMessage[]
+  initialBranches?: readonly ChatBranch[]
+  initialBranchTitle?: string
   initialTitle?: string
   initialModel?: string
   sessionId?: string
@@ -155,16 +180,31 @@ export function AiChat({
   onSessionChange?: (id: string, summary: ChatSummary) => void
   className?: string
 } = {}) {
-  const [localMessages, setMessages] = useState<ChatMessage[]>(
-    supplied ?? initialMessages
+  const [branches, setBranches] = useState<ChatBranchState[]>(() => [
+    {
+      id: originalChatBranchId,
+      title: initialBranchTitle,
+      messages: supplied ?? initialMessages,
+      running: previewPaused,
+    },
+    ...(initialBranches ?? []),
+  ])
+  const [branchId, setBranchId] = useState(originalChatBranchId)
+  const branchIndex = Math.max(
+    0,
+    branches.findIndex((branch) => branch.id === branchId)
   )
-  const messages = orchestrationTranscript?.messages ?? localMessages
-  const [prompt, setPrompt] = useState("")
+  const branch = branches[branchIndex]
+  const messages = orchestrationTranscript?.messages ?? branch.messages
+  const prompt = branch.draft?.text ?? ""
+  const editing = branch.draft?.editId
+  const running = orchestrationTranscript?.running ?? !!branch.running
+  const [feedback, setFeedback] = useState<
+    Record<string, MessageFeedbackValue | undefined>
+  >({})
   const [model, setModel] = useState(initialModel)
   const [title, setTitle] = useState(initialTitle)
-  const [editing, setEditing] = useState<string | null>(null)
-  const [running, setRunning] = useState(previewPaused)
-  const activeReply = useRef<ActiveReply | null>(null)
+  const activeReplies = useRef(new Map<string, ActiveReply>())
   const pendingCard = useRef<HTMLDivElement>(null)
   const latestActivity = messages.at(-1)?.activity
   const pendingRequest = getPendingRequest(latestActivity)
@@ -176,8 +216,14 @@ export function AiChat({
 
   useEffect(() => {
     if (sessionId)
-      onSessionChange?.(sessionId, { title, model, messages, running })
-  }, [sessionId, title, model, messages, running, onSessionChange])
+      onSessionChange?.(sessionId, {
+        title,
+        model,
+        messages,
+        running,
+        branchId,
+      })
+  }, [sessionId, title, model, messages, running, branchId, onSessionChange])
 
   function focusPending() {
     pendingCard.current?.scrollIntoView({ block: "nearest" })
@@ -187,29 +233,48 @@ export function AiChat({
     if (requestFocus) focusPending()
   }, [requestFocus])
 
-  useEffect(
-    () => () => {
-      const reply = activeReply.current
-      activeReply.current = null
-      reply?.controller.abort()
-    },
-    []
-  )
+  useEffect(() => {
+    const replies = activeReplies.current
+    return () => {
+      for (const reply of replies.values()) reply.controller.abort()
+      replies.clear()
+    }
+  }, [])
 
-  const cancelReply = () => {
-    const reply = activeReply.current
-    activeReply.current = null
-    reply?.controller.abort()
-    setRunning(false)
-    return reply?.id
+  function updateBranch(
+    id: string,
+    update: (current: ChatBranchState) => ChatBranchState
+  ) {
+    setBranches((current) =>
+      current.map((item) => (item.id === id ? update(item) : item))
+    )
+  }
+
+  function setPrompt(text: string) {
+    updateBranch(branchId, (current) => ({
+      ...current,
+      draft: { ...current.draft, text },
+    }))
+  }
+
+  function forkBranch(title: string, messages: ChatMessage[]) {
+    const id = crypto.randomUUID()
+    setBranches((current) => [...current, { id, title, messages }])
+    setBranchId(id)
+    return id
   }
 
   const stopReply = () => {
+    const reply = activeReplies.current.get(branchId)
+    activeReplies.current.delete(branchId)
+    reply?.controller.abort()
     const id =
-      cancelReply() ?? (previewPaused && running ? turns.at(-1)?.id : undefined)
+      reply?.id ?? (previewPaused && running ? turns.at(-1)?.id : undefined)
     if (!id) return
-    setMessages((previous) =>
-      previous.map((message) =>
+    updateBranch(branchId, (current) => ({
+      ...current,
+      running: false,
+      messages: current.messages.map((message) =>
         message.id === id
           ? {
               ...message,
@@ -217,19 +282,21 @@ export function AiChat({
               content: message.content || "已停止本次演示。",
             }
           : message
-      )
-    )
+      ),
+    }))
   }
 
   const applyReplyFrame = (
+    targetBranchId: string,
     id: string,
     frame: Pick<ChatMessage, "activity" | "content">
   ) => {
-    setMessages((previous) =>
-      previous.map((message) =>
+    updateBranch(targetBranchId, (current) => ({
+      ...current,
+      messages: current.messages.map((message) =>
         message.id === id ? { ...message, ...frame } : message
-      )
-    )
+      ),
+    }))
   }
 
   const respondToRequest = (
@@ -237,7 +304,7 @@ export function AiChat({
     requestId: string,
     value: string
   ) => {
-    const reply = activeReply.current
+    const reply = activeReplies.current.get(branchId)
     if (reply) {
       if (reply.id === message.id && reply.decision?.id === requestId)
         reply.decision.settle(value)
@@ -252,15 +319,24 @@ export function AiChat({
       return
     const frame = respondToCodingPreview(message.activity, requestId, value)
     if (!frame) return
-    applyReplyFrame(message.id, frame)
-    setRunning(!!getPendingRequest(frame.activity))
+    applyReplyFrame(branchId, message.id, frame)
+    updateBranch(branchId, (current) => ({
+      ...current,
+      running: !!getPendingRequest(frame.activity),
+    }))
   }
 
-  const startReply = async (id: string, question: string) => {
+  const startReply = async (
+    targetBranchId: string,
+    id: string,
+    question: string
+  ) => {
     const controller = new AbortController()
     const reply: ActiveReply = { id, controller }
-    activeReply.current = reply
-    setRunning(true)
+    activeReplies.current.set(targetBranchId, reply)
+    updateBranch(targetBranchId, (current) => ({ ...current, running: true }))
+    const isCurrentReply = () =>
+      activeReplies.current.get(targetBranchId) === reply
     const waitForRequest = (request: RunRequest) =>
       new Promise<string | undefined>((resolve) => {
         if (controller.signal.aborted) {
@@ -283,13 +359,14 @@ export function AiChat({
         confirmEdits,
         onRequest: waitForRequest,
       })) {
-        if (activeReply.current !== reply) return
-        applyReplyFrame(id, frame)
+        if (!isCurrentReply()) return
+        applyReplyFrame(targetBranchId, id, frame)
       }
     } catch {
-      if (activeReply.current === reply) {
-        setMessages((previous) =>
-          previous.map((message) =>
+      if (isCurrentReply()) {
+        updateBranch(targetBranchId, (current) => ({
+          ...current,
+          messages: current.messages.map((message) =>
             message.id === id
               ? {
                   ...message,
@@ -297,35 +374,42 @@ export function AiChat({
                   content: "演示中断了，可以重新生成回答。",
                 }
               : message
-          )
-        )
+          ),
+        }))
       }
     } finally {
-      if (activeReply.current === reply) {
-        activeReply.current = null
-        setRunning(false)
+      if (isCurrentReply()) {
+        activeReplies.current.delete(targetBranchId)
+        updateBranch(targetBranchId, (current) => ({
+          ...current,
+          running: false,
+        }))
       }
     }
   }
 
   const send = (submission: ComposerSubmission) => {
-    if (running || activeReply.current) return
+    if (running || activeReplies.current.has(branchId)) return
+    const editIndex = editing
+      ? messages.findIndex((item) => item.id === editing)
+      : -1
+    const fork = workspace && editIndex >= 0
     const base =
-      editing && !onInspect
-        ? messages.slice(
-            0,
-            messages.findIndex((item) => item.id === editing)
-          )
+      editIndex >= 0 && (fork || !onInspect)
+        ? messages.slice(0, editIndex)
         : messages
     const id = crypto.randomUUID()
     const replyId = `${id}-answer`
-    setMessages([
+    const next: ChatMessage[] = [
       ...base,
       {
         id,
         role: "user",
         content: submission.text,
-        attachments: submission.files.map((file) => file.name),
+        attachments:
+          fork && !submission.files.length
+            ? messages[editIndex].attachments
+            : submission.files.map((file) => file.name),
       },
       {
         id: replyId,
@@ -334,34 +418,56 @@ export function AiChat({
         model: submission.model,
         version: 1,
       },
-    ])
-    setPrompt("")
-    setEditing(null)
-    if (!base.length) setTitle(submission.text.slice(0, 42))
+    ]
+    const targetBranchId = fork
+      ? forkBranch("编辑消息 · " + submission.text.slice(0, 26), next)
+      : branchId
+    updateBranch(branchId, (current) => ({
+      ...current,
+      messages: fork ? current.messages : next,
+      draft: undefined,
+    }))
+    if (!base.length && !fork) setTitle(submission.text.slice(0, 42))
     onSend?.(submission)
-    void startReply(replyId, submission.text)
+    void startReply(targetBranchId, replyId, submission.text)
   }
   const retry = (message: ChatMessage) => {
-    if (running || activeReply.current) return
+    if (running || activeReplies.current.has(branchId)) return
     const index = messages.findIndex((item) => item.id === message.id)
     const question = messages
       .slice(0, index)
       .reverse()
       .find((item) => item.role === "user")
     if (!question) return
+    if (workspace) {
+      const replyId = crypto.randomUUID() + "-answer"
+      const targetBranchId = forkBranch(
+        "重新生成 · " + question.content.slice(0, 26),
+        [
+          ...messages.slice(0, index),
+          { id: replyId, role: "assistant", content: "", model },
+        ]
+      )
+      void startReply(targetBranchId, replyId, question.content)
+      return
+    }
     if (onInspect) {
       const id = crypto.randomUUID()
       const replyId = id + "-answer"
-      setMessages([
-        ...messages,
-        { ...question, id },
-        { id: replyId, role: "assistant", content: "", model },
-      ])
-      void startReply(replyId, question.content)
+      updateBranch(branchId, (current) => ({
+        ...current,
+        messages: [
+          ...messages,
+          { ...question, id },
+          { id: replyId, role: "assistant", content: "", model },
+        ],
+      }))
+      void startReply(branchId, replyId, question.content)
       return
     }
-    setMessages(
-      messages.slice(0, index + 1).map((item) =>
+    updateBranch(branchId, (current) => ({
+      ...current,
+      messages: messages.slice(0, index + 1).map((item) =>
         item.id === message.id
           ? {
               ...item,
@@ -371,18 +477,28 @@ export function AiChat({
               model,
             }
           : item
-      )
-    )
-    void startReply(message.id, question.content)
+      ),
+    }))
+    void startReply(branchId, message.id, question.content)
   }
   const resetThread = (nextMessages: ChatMessage[], nextTitle: string) => {
-    cancelReply()
-    setMessages(nextMessages)
-    setPrompt("")
-    setEditing(null)
+    for (const reply of activeReplies.current.values()) reply.controller.abort()
+    activeReplies.current.clear()
+    setBranches([
+      {
+        id: originalChatBranchId,
+        title: initialBranchTitle,
+        messages: nextMessages,
+      },
+    ])
+    setBranchId(originalChatBranchId)
+    setFeedback({})
     setTitle(nextTitle)
   }
   const newChat = () => resetThread([], "新对话")
+  const otherRunning = branches.filter(
+    (item) => item.id !== branchId && item.running
+  ).length
   return (
     <Card
       className={cn(
@@ -439,6 +555,32 @@ export function AiChat({
           )}
         </CardHeader>
       )}
+      {!orchestrationTranscript && branches.length > 1 && (
+        <div className="flex min-w-0 shrink-0 items-center gap-2 border-b px-3 py-1.5 text-xs sm:px-4">
+          <GitBranch
+            className="size-3.5 shrink-0 text-muted-foreground"
+            aria-hidden="true"
+          />
+          <span className="shrink-0 text-muted-foreground">对话分支</span>
+          <span
+            className="min-w-0 flex-1 truncate font-medium"
+            aria-live="polite"
+            title={branch.title}
+          >
+            {branch.title}
+          </span>
+          {otherRunning > 0 && (
+            <span className="hidden shrink-0 text-muted-foreground sm:inline">
+              {otherRunning} 个分支处理中
+            </span>
+          )}
+          <MessageBranchPicker
+            index={branchIndex}
+            count={branches.length}
+            onChange={(index) => setBranchId(branches[index].id)}
+          />
+        </div>
+      )}
       <CardContent
         className={cn(
           "min-h-0 flex-1 py-0",
@@ -446,6 +588,7 @@ export function AiChat({
         )}
       >
         <MessageScrollerProvider
+          key={branchId}
           autoScroll
           defaultScrollPosition={workspace ? "last-anchor" : "end"}
           scrollPreviousItemPeek={workspace ? 0 : undefined}
@@ -575,48 +718,76 @@ export function AiChat({
                         {onInspect && message.activity && message.content && (
                           <RunEvidenceActions
                             evidence={getRunEvidence(message.activity)}
+                            showWorkflow={
+                              message.activity.steps.length > 0 ||
+                              getWorkers(message.activity).length > 0
+                            }
                             onInspect={(view) =>
                               onInspect({ turnId: message.id }, view)
                             }
                           />
                         )}
-                        {message.content && !orchestrationTranscript && (
-                          <MessageFooter>
-                            <CopyAction value={message.content} />
-                            {message.role === "assistant" ? (
-                              <>
+                        {message.content &&
+                          (!orchestrationTranscript ||
+                            (workspace && message.role === "assistant")) && (
+                            <MessageFooter className="flex-wrap">
+                              <CopyAction value={message.content} />
+                              {message.role === "assistant" ? (
+                                <>
+                                  {!orchestrationTranscript && (
+                                    <Button
+                                      variant="ghost"
+                                      size="icon-sm"
+                                      aria-label="重新生成回答"
+                                      disabled={running}
+                                      onClick={() => retry(message)}
+                                    >
+                                      <RotateCcw />
+                                    </Button>
+                                  )}
+                                  {workspace ? (
+                                    (!running ||
+                                      message.id !== turns.at(-1)?.id) && (
+                                      <MessageFeedback
+                                        value={feedback[message.id]}
+                                        onChange={(value) =>
+                                          setFeedback((current) => ({
+                                            ...current,
+                                            [message.id]: value,
+                                          }))
+                                        }
+                                      />
+                                    )
+                                  ) : (
+                                    <FeedbackActions />
+                                  )}
+                                  {(message.version ?? 1) > 1 && (
+                                    <span className="ml-2">
+                                      版本 {message.version}
+                                    </span>
+                                  )}
+                                </>
+                              ) : (
                                 <Button
                                   variant="ghost"
                                   size="icon-sm"
-                                  aria-label="重新生成回答"
+                                  aria-label="编辑消息"
                                   disabled={running}
-                                  onClick={() => retry(message)}
+                                  onClick={() => {
+                                    updateBranch(branchId, (current) => ({
+                                      ...current,
+                                      draft: {
+                                        text: message.content,
+                                        editId: message.id,
+                                      },
+                                    }))
+                                  }}
                                 >
-                                  <RotateCcw />
+                                  <Pencil />
                                 </Button>
-                                <FeedbackActions />
-                                {(message.version ?? 1) > 1 && (
-                                  <span className="ml-2">
-                                    版本 {message.version}
-                                  </span>
-                                )}
-                              </>
-                            ) : (
-                              <Button
-                                variant="ghost"
-                                size="icon-sm"
-                                aria-label="编辑消息"
-                                disabled={running}
-                                onClick={() => {
-                                  setEditing(message.id)
-                                  setPrompt(message.content)
-                                }}
-                              >
-                                <Pencil />
-                              </Button>
-                            )}
-                          </MessageFooter>
-                        )}
+                              )}
+                            </MessageFooter>
+                          )}
                       </MessageContent>
                     </Message>
                   </MessageScrollerItem>
@@ -635,16 +806,20 @@ export function AiChat({
           {editing && (
             <div className="flex w-full items-center justify-between text-xs text-muted-foreground">
               <span>
-                {onInspect
-                  ? "正在编辑消息 · 发送后新增一轮"
-                  : "正在编辑消息 · 发送后从这里重新对话"}
+                {workspace
+                  ? "正在编辑消息 · 发送后创建分支"
+                  : onInspect
+                    ? "正在编辑消息 · 发送后新增一轮"
+                    : "正在编辑消息 · 发送后从这里重新对话"}
               </span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => {
-                  setEditing(null)
-                  setPrompt("")
+                  updateBranch(branchId, (current) => ({
+                    ...current,
+                    draft: undefined,
+                  }))
                 }}
               >
                 取消

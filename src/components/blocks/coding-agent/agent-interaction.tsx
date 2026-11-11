@@ -1,11 +1,14 @@
 import { useState } from "react"
 import {
   FileDiff as FileDiffIcon,
+  FileText,
   FlaskConical,
+  Globe,
   ListChecks,
   ShieldCheck,
   ShieldX,
   TerminalSquare,
+  Workflow,
 } from "lucide-react"
 import { Button } from "../../ui/button"
 import {
@@ -159,9 +162,11 @@ export function AgentInteraction({
 
 export function RunEvidenceActions({
   evidence,
+  showWorkflow,
   onInspect,
 }: {
   evidence: RunEvidence
+  showWorkflow?: boolean
   onInspect: (view: WorkspaceView) => void
 }) {
   const changes = evidence.files.filter(
@@ -196,6 +201,32 @@ export function RunEvidenceActions({
         <Button variant="outline" size="xs" onClick={() => onInspect("tests")}>
           <FlaskConical data-icon="inline-start" />
           {failed ? failed + " 项测试失败" : tests.length + " 项测试通过"}
+        </Button>
+      )}
+      {!!evidence.pages?.length && (
+        <Button variant="outline" size="xs" onClick={() => onInspect("web")}>
+          <Globe data-icon="inline-start" />
+          网页预览
+        </Button>
+      )}
+      {!!evidence.artifacts?.length && (
+        <Button
+          variant="outline"
+          size="xs"
+          onClick={() => onInspect("artifacts")}
+        >
+          <FileText data-icon="inline-start" />
+          查看产物
+        </Button>
+      )}
+      {showWorkflow && (
+        <Button
+          variant="outline"
+          size="xs"
+          onClick={() => onInspect("workflow")}
+        >
+          <Workflow data-icon="inline-start" />
+          流程图
         </Button>
       )}
     </div>

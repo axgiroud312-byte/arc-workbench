@@ -4,9 +4,17 @@ import type { FileDiff } from "./diff-preview"
 import type { SubagentCallData } from "./subagent-call"
 import type { TestRun } from "./test-results"
 import type { ToolCallData } from "./tool-call"
+import type { WebPreviewPage } from "./web-preview"
 
 export type WorkspaceView =
-  "overview" | "files" | "changes" | "terminal" | "tests"
+  | "overview"
+  | "files"
+  | "changes"
+  | "terminal"
+  | "tests"
+  | "web"
+  | "artifacts"
+  | "workflow"
 
 export type RunSelection = {
   turnId: string
@@ -36,7 +44,21 @@ export type RunApproval = ApprovalRequest & {
 
 export type RunRequest = RunQuestion | RunApproval
 
-export type RunEvidence = {
+export type RunArtifact = {
+  id: string
+  title: string
+  filename: string
+  source: string
+  summary?: string
+  items?: readonly { label: string; value: string }[]
+}
+
+export type RunOutputs = {
+  pages?: readonly WebPreviewPage[]
+  artifacts?: readonly RunArtifact[]
+}
+
+export type RunEvidence = RunOutputs & {
   files: RunFile[]
   commands: ToolCallData[]
   testRuns: TestRun[]
@@ -67,7 +89,7 @@ const filePriority: Record<RunFile["status"], number> = {
 export function getRunEvidence(
   activity: AgentActivity | undefined,
   worker?: SubagentCallData
-): RunEvidence {
+) {
   const workers = worker ? [worker] : getWorkers(activity)
   const files = new Map<string, RunFile>()
   for (const entry of workers.flatMap((item) => item.files ?? [])) {
@@ -84,10 +106,19 @@ export function getRunEvidence(
     : (activity?.actions ?? []).flatMap((action) =>
         action.kind === "tool" ? [action] : (action.tools ?? [])
       )
+  const outputs = worker
+    ? [worker.outputs]
+    : [activity?.outputs, ...workers.map((item) => item.outputs)]
+  const pages = outputs.flatMap((output) => output?.pages ?? [])
+  const artifacts = outputs.flatMap((output) => output?.artifacts ?? [])
   return {
     files: [...files.values()],
     commands: tools.filter((tool) => tool.name === "run_command"),
     testRuns: workers.flatMap((item) => item.testRuns ?? []),
+    pages: [...new Map(pages.map((page) => [page.id, page])).values()],
+    artifacts: [
+      ...new Map(artifacts.map((artifact) => [artifact.id, artifact])).values(),
+    ],
   }
 }
 

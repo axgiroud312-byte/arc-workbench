@@ -8,7 +8,9 @@ export { MultiAgentOrchestration } from "./multi-agent-orchestration"
 export { AgentInteraction, RunEvidenceActions } from "./agent-interaction"
 export type {
   RunRequest,
+  RunArtifact,
   RunEvidence,
+  RunOutputs,
   RunSelection,
   WorkspaceView,
 } from "./run-record"

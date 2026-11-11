@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { demoFiles, type AgentActivity } from "./coding-demo"
 import { getUnfinishedDependencies, type RunSelection } from "./run-record"
+import { runReport, testRunOutput } from "./run-output"
 import type { SubagentCallData } from "./subagent-call"
 import type { TestRun } from "./test-results"
 import type { ToolCallData } from "./tool-call"
@@ -39,6 +40,17 @@ const logic: Worker = {
     },
   ],
   result: "已找到回车提交函数，并把入口交给回归测试任务。",
+  outputs: runReport({
+    id: "logic-findings",
+    title: "回车提交入口",
+    filename: "keydown-findings.md",
+    path: "/checks/keydown",
+    summary: "定位结果已交给回归测试任务。",
+    items: [
+      { label: "入口", value: "onKeyDown" },
+      { label: "提交函数", value: "handleSubmit" },
+    ],
+  }),
   duration: "1.2 秒",
 }
 
@@ -73,6 +85,16 @@ const shortcuts: Worker = {
     },
   ],
   result: "文档中两项快捷键说明已核对。",
+  outputs: runReport({
+    id: "shortcut-findings",
+    title: "快捷键说明核对",
+    filename: "shortcut-review.md",
+    path: "/checks/shortcuts",
+    items: [
+      { label: "Enter", value: "发送消息" },
+      { label: "Shift + Enter", value: "换行" },
+    ],
+  }),
   duration: "0.9 秒",
 }
 
@@ -99,6 +121,7 @@ function running(worker: Worker): Worker {
     status: "running",
     result: undefined,
     duration: undefined,
+    outputs: undefined,
     tools: worker.tools?.map((tool) => ({
       ...tool,
       status: "running",
@@ -140,6 +163,10 @@ function withAttempt(
             },
           ],
   }
+  const output =
+    status === "running"
+      ? undefined
+      : testRunOutput(testRun, "regression-attempt-" + number + ".md")
   return {
     ...worker,
     status,
@@ -156,6 +183,15 @@ function withAttempt(
       ...(worker.testRuns ?? []).filter((item) => item.id !== id),
       testRun,
     ],
+    outputs: output
+      ? {
+          pages: [...(output.pages ?? []), ...(worker.outputs?.pages ?? [])],
+          artifacts: [
+            ...(output.artifacts ?? []),
+            ...(worker.outputs?.artifacts ?? []),
+          ],
+        }
+      : worker.outputs,
   }
 }
 

@@ -19,6 +19,47 @@ export type MessageBranch = {
   answer?: string
 }
 
+export function MessageBranchPicker({
+  index,
+  count,
+  onChange,
+}: {
+  index: number
+  count: number
+  onChange: (index: number) => void
+}) {
+  if (count < 2) return null
+  return (
+    <div
+      className="inline-flex shrink-0 items-center gap-1 rounded-md border p-0.5"
+      aria-label="对话分支"
+      role="group"
+    >
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        aria-label="上一个分支"
+        disabled={index === 0}
+        onClick={() => onChange(index - 1)}
+      >
+        <ChevronLeftIcon />
+      </Button>
+      <span aria-live="polite" className="px-1 text-xs tabular-nums">
+        {index + 1} / {count}
+      </span>
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        aria-label="下一个分支"
+        disabled={index >= count - 1}
+        onClick={() => onChange(index + 1)}
+      >
+        <ChevronRightIcon />
+      </Button>
+    </div>
+  )
+}
+
 export function MessageBranches({
   branches,
   value,
@@ -55,33 +96,11 @@ export function MessageBranches({
           </p>
           {branches.length > 1 && (
             <MessageFooter>
-              <div
-                className="inline-flex items-center gap-1 rounded-md border p-0.5"
-                aria-label="对话分支"
-                role="group"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon-xs"
-                  aria-label="上一个分支"
-                  disabled={index === 0}
-                  onClick={() => onValueChange(branches[index - 1].id)}
-                >
-                  <ChevronLeftIcon />
-                </Button>
-                <span aria-live="polite" className="px-1 text-xs tabular-nums">
-                  {index + 1} / {branches.length}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon-xs"
-                  aria-label="下一个分支"
-                  disabled={index === branches.length - 1}
-                  onClick={() => onValueChange(branches[index + 1].id)}
-                >
-                  <ChevronRightIcon />
-                </Button>
-              </div>
+              <MessageBranchPicker
+                index={index}
+                count={branches.length}
+                onChange={(next) => onValueChange(branches[next].id)}
+              />
             </MessageFooter>
           )}
         </MessageContent>
