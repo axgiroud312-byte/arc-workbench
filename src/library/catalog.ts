@@ -605,6 +605,99 @@ const definitions: readonly BlockEntry[] = [
     "agents",
     "浏览不同用途的 Agent，查看配置并选择一个开始。",
   ],
+  [
+    "message-branches",
+    "对话分支",
+    "MessageBranches",
+    "Elements",
+    "chat-elements",
+    "在不同回复之间切换，也可以编辑已发送的消息，创建新分支。",
+    {
+      demo: "MessageBranchesDemo",
+      useDemo: true,
+      reference: "https://www.assistant-ui.com/elements/message-branches",
+    },
+  ],
+  [
+    "message-feedback",
+    "回复反馈",
+    "MessageFeedback",
+    "Elements",
+    "chat-elements",
+    "给回复点赞，或选一个原因提交改进意见。",
+    {
+      demo: "MessageFeedbackDemo",
+      useDemo: true,
+      reference: "https://www.assistant-ui.com/elements/feedback-dialog",
+    },
+  ],
+  [
+    "response-stream",
+    "流式回复播放",
+    "ResponseStream",
+    "Elements",
+    "chat-elements",
+    "逐段显示示例回复，可以暂停、继续和重播。",
+    {
+      demo: "ResponseStreamDemo",
+      useDemo: true,
+      reference:
+        "https://github.com/ibelick/prompt-kit/blob/main/components/prompt-kit/response-stream.tsx",
+    },
+  ],
+  [
+    "file-dropzone",
+    "附件拖放区",
+    "FileDropzone",
+    "Elements",
+    "chat-elements",
+    "把本地文件拖进对话，也可以打开文件选择器。",
+    {
+      demo: "FileDropzoneDemo",
+      useDemo: true,
+      reference:
+        "https://github.com/ibelick/prompt-kit/blob/main/components/prompt-kit/file-upload.tsx",
+    },
+  ],
+  [
+    "web-preview",
+    "生成网页预览",
+    "WebPreview",
+    "Coding",
+    "coding-agent",
+    "切换示例页面，查看桌面和手机尺寸下的网页。",
+    {
+      demo: "WebPreviewDemo",
+      useDemo: true,
+      reference: "https://elements.ai-sdk.dev/components/web-preview",
+    },
+  ],
+  [
+    "artifact-panel",
+    "产物查看器",
+    "ArtifactPanel",
+    "Coding",
+    "coding-agent",
+    "在 Agent 生成的报告和源码间切换，复制文件内容。",
+    {
+      demo: "ArtifactPanelDemo",
+      useDemo: true,
+      reference: "https://elements.ai-sdk.dev/components/artifact",
+    },
+  ],
+  [
+    "workflow-graph",
+    "Agent 流程图",
+    "WorkflowGraph",
+    "Agents",
+    "agents",
+    "按阶段查看并行任务，点节点检查它的状态、结果和前置任务。",
+    {
+      demo: "WorkflowGraphDemo",
+      useDemo: true,
+      reference: "https://www.assistant-ui.com/elements/flow-graph",
+    },
+  ],
 ] as const
 
 export const registryRepository = "axgiroud312-byte/arc-workbench"
@@ -621,6 +714,10 @@ const conversationIds = new Set([
   "message",
   "question",
   "suggestion",
+  "message-branches",
+  "message-feedback",
+  "response-stream",
+  "file-dropzone",
 ])
 const contextIds = new Set([
   "checkpoint",
@@ -638,6 +735,10 @@ export const librarySections = {
   execution: "编程与执行",
   workflows: "AI 工作流",
   agents: "Agent 管理",
+  foundationLayout: "布局与内容",
+  foundationNavigation: "菜单与导航",
+  foundationForms: "表单与选择",
+  foundationFeedback: "浮层与反馈",
 } as const
 type LibrarySection = keyof typeof librarySections
 
@@ -680,28 +781,29 @@ export const libraryKits = [
   {
     id: "foundation",
     title: "Base UI 基础包",
-    description: "按钮、表单、菜单、侧栏、消息滚动、代码块和执行轨迹。",
+    description: "布局、菜单、表单、图表、反馈，以及消息滚动和执行轨迹。",
     entry: null,
     preview: null,
   },
   {
     id: "chat-kit",
     title: "AI 对话套件",
-    description: "对话、输入框、模型选择、附件、引用和推理摘要。",
+    description: "对话、输入、模型、附件、回复分支、反馈、引用和推理摘要。",
     entry: "src/library/chat-kit.ts",
     preview: "ai-chat",
   },
   {
     id: "coding-kit",
     title: "编程工作台套件",
-    description: "编程对话、子 Agent 编排、审批、文件审阅、命令、测试和设置。",
+    description:
+      "编程工作台、子 Agent 编排、审批、文件、命令、测试和产物预览。",
     entry: "src/library/coding-kit.ts",
     preview: "coding-agent-panel",
   },
   {
     id: "agent-kit",
     title: "Agent 管理套件",
-    description: "运行、任务、审批、工具连接、知识库、配置和评测。",
+    description: "运行、任务、流程图、审批、工具连接、知识库和评测。",
     entry: "src/library/agent-kit.ts",
     preview: "agent-run",
   },

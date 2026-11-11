@@ -16,6 +16,7 @@ import {
   librarySections,
   registryHome,
 } from "../src/library/catalog.ts"
+import { foundationCatalog } from "../src/library/foundation.ts"
 
 const root = fileURLToPath(new URL("../", import.meta.url))
 const manifest = JSON.parse(
@@ -152,12 +153,13 @@ const blocks = Object.keys(librarySections).flatMap((section) =>
 )
 const primitives = foundation.map((file) => {
   const name = path.posix.basename(file, ".tsx")
+  const preview = foundationCatalog.find((entry) => entry.path === file)
   return createItem(
     "ui/" + name,
-    name,
-    "Arc Workbench 使用的 Base UI 基础组件。",
+    preview?.name ?? name,
+    preview?.description ?? "Arc Workbench 使用的 Base UI 基础组件。",
     "registry:ui",
-    "Base UI 基础组件",
+    preview ? librarySections[preview.section] : "Base UI 基础组件",
     [file]
   )
 })

@@ -108,9 +108,10 @@ export default function App() {
   const [codeTab, setCodeTab] = useState("source")
   const [width, setWidth] = useState("desktop")
   const [resetKey, setResetKey] = useState(0)
-  const [sourceFile, setSourceFile] = useState<{
+  const [codeFiles, setCodeFiles] = useState<{
     id: string
-    content: string
+    source: string
+    usage: string
   }>()
   const [copied, setCopied] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -124,7 +125,9 @@ export default function App() {
   const index = blocks.indexOf(block)
   const widePreview = block.id === "coding-agent-panel"
   const ComponentPreview = block.Component
-  const source = sourceFile?.id === block.id ? sourceFile.content : ""
+  const source = codeFiles?.id === block.id ? codeFiles.source : ""
+  const usage = codeFiles?.id === block.id ? codeFiles.usage : ""
+  const fileName = block.path.split("/").at(-1)
   useEffect(() => {
     document
       .querySelector('.desktop-sidebar [aria-current="page"]')
@@ -147,8 +150,8 @@ export default function App() {
     }
     document.title = `${block.name} · Arc / shadcn`
     let alive = true
-    block.source().then((text) => {
-      if (alive) setSourceFile({ id: block.id, content: text })
+    block.loadCode().then((files) => {
+      if (alive) setCodeFiles({ id: block.id, ...files })
     })
     return () => {
       alive = false
@@ -202,7 +205,7 @@ export default function App() {
     )
     const a = document.createElement("a")
     a.href = url
-    a.download = `${block.id}.tsx`
+    a.download = fileName ?? `${block.id}.tsx`
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -574,7 +577,7 @@ export default function App() {
                           size="sm"
                           variant="outline"
                           onClick={() =>
-                            copy(codeTab === "source" ? source : block.usage)
+                            copy(codeTab === "source" ? source : usage)
                           }
                         >
                           {copied ? (
@@ -588,13 +591,11 @@ export default function App() {
                       <CodeBlock>
                         <CodeBlockHeader>
                           <CodeBlockTitle>
-                            {codeTab === "source"
-                              ? `${block.id}.tsx`
-                              : "example.tsx"}
+                            {codeTab === "source" ? fileName : "example.tsx"}
                           </CodeBlockTitle>
                         </CodeBlockHeader>
                         <CodeBlockContent className="max-h-[680px]" lineNumbers>
-                          {codeTab === "source" ? source : block.usage}
+                          {codeTab === "source" ? source : usage}
                         </CodeBlockContent>
                       </CodeBlock>
                     </div>
@@ -606,17 +607,17 @@ export default function App() {
                     <span>shadcn Base UI</span>
                   </div>
                   <div className="mb-4 flex flex-col gap-3">
-                    <InstallCommand id={block.id} />
+                    <InstallCommand id={block.installId} />
                     <InstallStyles />
                   </div>
                   <CodeBlock>
                     <CodeBlockHeader>
                       <CodeBlockTitle>example.tsx</CodeBlockTitle>
                       <CodeBlockActions>
-                        <CodeBlockCopyButton value={block.usage} />
+                        <CodeBlockCopyButton value={usage} />
                       </CodeBlockActions>
                     </CodeBlockHeader>
-                    <CodeBlockContent>{block.usage}</CodeBlockContent>
+                    <CodeBlockContent>{usage}</CodeBlockContent>
                   </CodeBlock>
                   <p>
                     演示使用本地数据。真实模型、服务连接和定时执行，需要在你的项目中接入对应接口。
@@ -692,7 +693,9 @@ export default function App() {
                 rel="noreferrer"
                 className="toc-reference"
               >
-                {block.category === "Coding" ? "参考文档" : "原站组件"}
+                {block.reference.includes("uiarc.dev")
+                  ? "原站组件"
+                  : "参考文档"}
                 <ArrowUpRight className="size-3" />
               </a>
               <span className="toc-note">

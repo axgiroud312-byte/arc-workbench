@@ -7,16 +7,21 @@
       "name": "foundation",
       "type": "registry:item",
       "title": "Base UI 基础包",
-      "description": "按钮、表单、菜单、侧栏、消息滚动、代码块和执行轨迹。",
+      "description": "布局、菜单、表单、图表、反馈，以及消息滚动和执行轨迹。",
       "categories": [
         "组合套件"
       ],
       "dependencies": [
         "@base-ui/react@^1.9.0",
         "@shadcn/react@^0.3.1",
+        "@tanstack/react-table@^8.21.3",
         "class-variance-authority@^0.7.1",
         "cn@^0.5.2",
-        "lucide-react@^1.70.0"
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@^1.70.0",
+        "react-day-picker@^10.0.2",
+        "react-resizable-panels@^4.21.0",
+        "recharts@^3.8.0"
       ],
       "files": [
         {
@@ -25,9 +30,24 @@
           "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
         },
         {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/accordion.tsx"
+        },
+        {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/alert-dialog.tsx"
+        },
+        {
           "path": "src/components/ui/alert.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/alert.tsx"
+        },
+        {
+          "path": "src/components/ui/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/aspect-ratio.tsx"
         },
         {
           "path": "src/components/ui/attachment.tsx",
@@ -45,9 +65,19 @@
           "target": "@components/arc-workbench/components/ui/badge.tsx"
         },
         {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/breadcrumb.tsx"
+        },
+        {
           "path": "src/components/ui/bubble.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/bubble.tsx"
+        },
+        {
+          "path": "src/components/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button-group.tsx"
         },
         {
           "path": "src/components/ui/button.tsx",
@@ -55,9 +85,24 @@
           "target": "@components/arc-workbench/components/ui/button.tsx"
         },
         {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/calendar.tsx"
+        },
+        {
           "path": "src/components/ui/card.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/card.tsx"
+        },
+        {
+          "path": "src/components/ui/carousel.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/carousel.tsx"
+        },
+        {
+          "path": "src/components/ui/chart.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/chart.tsx"
         },
         {
           "path": "src/components/ui/checkbox.tsx",
@@ -75,9 +120,44 @@
           "target": "@components/arc-workbench/components/ui/collapsible.tsx"
         },
         {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/combobox.tsx"
+        },
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/command.tsx"
+        },
+        {
+          "path": "src/components/ui/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/context-menu.tsx"
+        },
+        {
+          "path": "src/components/ui/data-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/data-table.tsx"
+        },
+        {
+          "path": "src/components/ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/date-picker.tsx"
+        },
+        {
           "path": "src/components/ui/dialog.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
+          "path": "src/components/ui/direction.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/direction.tsx"
+        },
+        {
+          "path": "src/components/ui/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/drawer.tsx"
         },
         {
           "path": "src/components/ui/dropdown-menu.tsx",
@@ -95,6 +175,11 @@
           "target": "@components/arc-workbench/components/ui/field.tsx"
         },
         {
+          "path": "src/components/ui/form.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/form.tsx"
+        },
+        {
           "path": "src/components/ui/hover-card.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/hover-card.tsx"
@@ -103,6 +188,11 @@
           "path": "src/components/ui/input-group.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/input-group.tsx"
+        },
+        {
+          "path": "src/components/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input-otp.tsx"
         },
         {
           "path": "src/components/ui/input.tsx",
@@ -115,6 +205,11 @@
           "target": "@components/arc-workbench/components/ui/item.tsx"
         },
         {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/kbd.tsx"
+        },
+        {
           "path": "src/components/ui/label.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/label.tsx"
@@ -123,6 +218,11 @@
           "path": "src/components/ui/marker.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/marker.tsx"
+        },
+        {
+          "path": "src/components/ui/menubar.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/menubar.tsx"
         },
         {
           "path": "src/components/ui/message-scroller.tsx",
@@ -135,6 +235,26 @@
           "target": "@components/arc-workbench/components/ui/message.tsx"
         },
         {
+          "path": "src/components/ui/native-select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/native-select.tsx"
+        },
+        {
+          "path": "src/components/ui/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/navigation-menu.tsx"
+        },
+        {
+          "path": "src/components/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/pagination.tsx"
+        },
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/popover.tsx"
+        },
+        {
           "path": "src/components/ui/progress.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/progress.tsx"
@@ -143,6 +263,16 @@
           "path": "src/components/ui/questionnaire.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
+        },
+        {
+          "path": "src/components/ui/resizable.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/resizable.tsx"
         },
         {
           "path": "src/components/ui/scroll-area.tsx",
@@ -178,6 +308,11 @@
           "path": "src/components/ui/slider.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/slider.tsx"
+        },
+        {
+          "path": "src/components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/spinner.tsx"
         },
         {
           "path": "src/components/ui/switch.tsx",
@@ -225,6 +360,11 @@
           "target": "@components/arc-workbench/components/ui/trace.tsx"
         },
         {
+          "path": "src/components/ui/typography.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/typography.tsx"
+        },
+        {
           "path": "src/hooks/use-mobile.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/hooks/use-mobile.ts"
@@ -241,7 +381,7 @@
       "name": "chat-kit",
       "type": "registry:item",
       "title": "AI 对话套件",
-      "description": "对话、输入框、模型选择、附件、引用和推理摘要。",
+      "description": "对话、输入、模型、附件、回复分支、反馈、引用和推理摘要。",
       "categories": [
         "组合套件"
       ],
@@ -435,9 +575,24 @@
           "target": "@components/arc-workbench/components/blocks/chat-elements/context.tsx"
         },
         {
+          "path": "src/components/blocks/chat-elements/file-dropzone.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/file-dropzone.tsx"
+        },
+        {
           "path": "src/components/blocks/chat-elements/inline-citation.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/chat-elements/inline-citation.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/message-branches.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-branches.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/message-feedback.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-feedback.tsx"
         },
         {
           "path": "src/components/blocks/chat-elements/plan.tsx",
@@ -448,6 +603,11 @@
           "path": "src/components/blocks/chat-elements/reasoning.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/chat-elements/reasoning.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/response-stream.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/response-stream.tsx"
         },
         {
           "path": "src/components/blocks/chat-elements/shimmer.tsx",
@@ -580,6 +740,11 @@
           "target": "@components/arc-workbench/components/ui/collapsible.tsx"
         },
         {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
           "path": "src/components/ui/dropdown-menu.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/dropdown-menu.tsx"
@@ -628,6 +793,11 @@
           "path": "src/components/ui/questionnaire.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
         },
         {
           "path": "src/components/ui/separator.tsx",
@@ -686,7 +856,7 @@
       "name": "coding-kit",
       "type": "registry:item",
       "title": "编程工作台套件",
-      "description": "编程对话、子 Agent 编排、审批、文件审阅、命令、测试和设置。",
+      "description": "编程工作台、子 Agent 编排、审批、文件、命令、测试和产物预览。",
       "categories": [
         "组合套件"
       ],
@@ -879,6 +1049,11 @@
           "target": "@components/arc-workbench/components/blocks/coding-agent/agent-interaction.tsx"
         },
         {
+          "path": "src/components/blocks/coding-agent/artifact-panel.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/artifact-panel.tsx"
+        },
+        {
           "path": "src/components/blocks/coding-agent/code-sample.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/code-sample.tsx"
@@ -982,6 +1157,11 @@
           "path": "src/components/blocks/coding-agent/tool-call.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/coding-agent/tool-call.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
         },
         {
           "path": "src/components/blocks/shared.tsx",
@@ -1170,7 +1350,7 @@
       "name": "agent-kit",
       "type": "registry:item",
       "title": "Agent 管理套件",
-      "description": "运行、任务、审批、工具连接、知识库、配置和评测。",
+      "description": "运行、任务、流程图、审批、工具连接、知识库和评测。",
       "categories": [
         "组合套件"
       ],
@@ -1366,6 +1546,11 @@
           "path": "src/components/blocks/agents/mcp-servers.tsx",
           "type": "registry:file",
           "target": "@components/arc-workbench/components/blocks/agents/mcp-servers.tsx"
+        },
+        {
+          "path": "src/components/blocks/agents/workflow-graph.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/agents/workflow-graph.tsx"
         },
         {
           "path": "src/components/blocks/eval-suite.tsx",
@@ -3127,6 +3312,222 @@
           "path": "src/lib/utils.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/lib/utils.ts"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "message-branches",
+      "type": "registry:block",
+      "title": "对话分支",
+      "description": "在不同回复之间切换，也可以编辑已发送的消息，创建新分支。",
+      "categories": [
+        "对话与输入"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/chat-elements/message-branches.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-branches.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/card.tsx"
+        },
+        {
+          "path": "src/components/ui/message.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/message.tsx"
+        },
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/textarea.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "message-feedback",
+      "type": "registry:block",
+      "title": "回复反馈",
+      "description": "给回复点赞，或选一个原因提交改进意见。",
+      "categories": [
+        "对话与输入"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/chat-elements/message-feedback.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/message-feedback.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/card.tsx"
+        },
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
+          "path": "src/components/ui/message.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/message.tsx"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
+        },
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/textarea.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "response-stream",
+      "type": "registry:block",
+      "title": "流式回复播放",
+      "description": "逐段显示示例回复，可以暂停、继续和重播。",
+      "categories": [
+        "对话与输入"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/chat-elements/response-stream.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/response-stream.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/card.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "file-dropzone",
+      "type": "registry:block",
+      "title": "附件拖放区",
+      "description": "把本地文件拖进对话，也可以打开文件选择器。",
+      "categories": [
+        "对话与输入"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/chat-elements/attachments.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/attachments.tsx"
+        },
+        {
+          "path": "src/components/blocks/chat-elements/file-dropzone.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/chat-elements/file-dropzone.tsx"
+        },
+        {
+          "path": "src/components/blocks/coding-agent/preview-card.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/preview-card.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/attachment.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/attachment.tsx"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/card.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -7127,6 +7528,107 @@
           "path": "src/lib/utils.ts",
           "type": "registry:file",
           "target": "@components/arc-workbench/lib/utils.ts"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "web-preview",
+      "type": "registry:block",
+      "title": "生成网页预览",
+      "description": "切换示例页面，查看桌面和手机尺寸下的网页。",
+      "categories": [
+        "编程与执行"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/coding-agent/web-preview.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/web-preview.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/select.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/toggle.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "artifact-panel",
+      "type": "registry:block",
+      "title": "产物查看器",
+      "description": "在 Agent 生成的报告和源码间切换，复制文件内容。",
+      "categories": [
+        "编程与执行"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/coding-agent/artifact-panel.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/coding-agent/artifact-panel.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/code-block.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/code-block.tsx"
+        },
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/tabs.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -12270,6 +12772,118 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "workflow-graph",
+      "type": "registry:block",
+      "title": "Agent 流程图",
+      "description": "按阶段查看并行任务，点节点检查它的状态、结果和前置任务。",
+      "categories": [
+        "Agent 管理"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/agents/workflow-graph.tsx",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/blocks/agents/workflow-graph.tsx"
+        },
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/badge.tsx"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/accordion",
+      "type": "registry:ui",
+      "title": "手风琴",
+      "description": "展开一组问题中的任意一项。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/accordion.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/alert-dialog",
+      "type": "registry:ui",
+      "title": "危险操作确认",
+      "description": "执行删除前确认，或取消并保留草稿。",
+      "categories": [
+        "浮层与反馈"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/alert-dialog.tsx"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/alert",
       "type": "registry:ui",
       "title": "alert",
@@ -12291,6 +12905,36 @@
           "path": "src/components/ui/alert.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/alert.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/aspect-ratio",
+      "type": "registry:ui",
+      "title": "固定宽高比",
+      "description": "在 16:9 和 4:3 之间切换，画面随容器调整。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/aspect-ratio.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -12401,6 +13045,38 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/breadcrumb",
+      "type": "registry:ui",
+      "title": "面包屑导航",
+      "description": "查看当前页面层级，点击上一级返回。",
+      "categories": [
+        "菜单与导航"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/breadcrumb.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/bubble",
       "type": "registry:ui",
       "title": "bubble",
@@ -12423,6 +13099,43 @@
           "path": "src/components/ui/bubble.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/bubble.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/button-group",
+      "type": "registry:ui",
+      "title": "按钮组",
+      "description": "把相关操作放在一起，切换文字对齐方式。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button-group.tsx"
+        },
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/separator.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -12465,6 +13178,45 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/calendar",
+      "type": "registry:ui",
+      "title": "日历",
+      "description": "翻看月份，选择一个日期区间。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0",
+        "react-day-picker@^10.0.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/calendar.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/card",
       "type": "registry:ui",
       "title": "card",
@@ -12485,6 +13237,76 @@
           "path": "src/components/ui/card.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/card.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/carousel",
+      "type": "registry:ui",
+      "title": "轮播",
+      "description": "滑动或按箭头切换项目卡片。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/carousel.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/carousel.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/chart",
+      "type": "registry:ui",
+      "title": "图表",
+      "description": "查看每周运行量，悬停查看明细。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "cn@^0.5.2",
+        "recharts@^3.8.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/chart.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/chart.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -12595,6 +13417,252 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/combobox",
+      "type": "registry:ui",
+      "title": "可搜索下拉框",
+      "description": "输入关键词并选择项目，支持键盘操作。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/combobox.tsx"
+        },
+        {
+          "path": "src/components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input-group.tsx"
+        },
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input.tsx"
+        },
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/textarea.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/command",
+      "type": "registry:ui",
+      "title": "命令面板",
+      "description": "搜索命令，用鼠标或方向键和回车执行。",
+      "categories": [
+        "菜单与导航"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/command.tsx"
+        },
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
+          "path": "src/components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input-group.tsx"
+        },
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input.tsx"
+        },
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/kbd.tsx"
+        },
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/textarea.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/context-menu",
+      "type": "registry:ui",
+      "title": "右键菜单",
+      "description": "右键或长按文件，查看可用操作。",
+      "categories": [
+        "菜单与导航"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/context-menu.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/data-table",
+      "type": "registry:ui",
+      "title": "可排序数据表",
+      "description": "筛选 Agent 运行记录，按列排序并翻页。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "@tanstack/react-table@^8.21.3",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/data-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/data-table.tsx"
+        },
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input.tsx"
+        },
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/table.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/date-picker",
+      "type": "registry:ui",
+      "title": "日期选择器",
+      "description": "展开日历并选择日期。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0",
+        "react-day-picker@^10.0.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/calendar.tsx"
+        },
+        {
+          "path": "src/components/ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/date-picker.tsx"
+        },
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/popover.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/dialog",
       "type": "registry:ui",
       "title": "dialog",
@@ -12623,6 +13691,67 @@
           "path": "src/components/ui/dialog.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/dialog.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/direction",
+      "type": "registry:ui",
+      "title": "文字方向",
+      "description": "切换从左到右和从右到左的布局。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/direction.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/direction.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/drawer",
+      "type": "registry:ui",
+      "title": "抽屉",
+      "description": "打开底部抽屉，向下滑动或点击按钮关闭。",
+      "categories": [
+        "浮层与反馈"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/drawer.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -12738,6 +13867,37 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/form",
+      "type": "registry:ui",
+      "title": "校验表单",
+      "description": "提交前检查项目名称，在字段旁显示错误。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/form.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/form.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/hover-card",
       "type": "registry:ui",
       "title": "hover-card",
@@ -12816,6 +13976,38 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/input-otp",
+      "type": "registry:ui",
+      "title": "验证码输入",
+      "description": "输入或粘贴六位数字。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/input-otp.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/input",
       "type": "registry:ui",
       "title": "input",
@@ -12884,6 +14076,36 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/kbd",
+      "type": "registry:ui",
+      "title": "键盘按键",
+      "description": "展示桌面和移动端说明中常用的快捷键。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/kbd.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/label",
       "type": "registry:ui",
       "title": "label",
@@ -12936,6 +14158,43 @@
           "path": "src/components/ui/marker.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/marker.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/menubar",
+      "type": "registry:ui",
+      "title": "应用菜单栏",
+      "description": "在文件和视图菜单中选择命令。",
+      "categories": [
+        "菜单与导航"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/dropdown-menu.tsx"
+        },
+        {
+          "path": "src/components/ui/menubar.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/menubar.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -13015,6 +14274,139 @@
       "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
     },
     {
+      "name": "ui/native-select",
+      "type": "registry:ui",
+      "title": "原生选择框",
+      "description": "用系统原生控件选择语言。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/native-select.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/native-select.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/navigation-menu",
+      "type": "registry:ui",
+      "title": "站点导航菜单",
+      "description": "查看文档与项目入口，支持键盘导航。",
+      "categories": [
+        "菜单与导航"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/navigation-menu.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/pagination",
+      "type": "registry:ui",
+      "title": "分页",
+      "description": "按页浏览运行记录。",
+      "categories": [
+        "菜单与导航"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/button.tsx"
+        },
+        {
+          "path": "src/components/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/pagination.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/popover",
+      "type": "registry:ui",
+      "title": "气泡面板",
+      "description": "在按钮旁显示运行概况。",
+      "categories": [
+        "浮层与反馈"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/popover.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
       "name": "ui/progress",
       "type": "registry:ui",
       "title": "progress",
@@ -13075,6 +14467,68 @@
           "path": "src/components/ui/questionnaire.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/questionnaire.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/radio-group",
+      "type": "registry:ui",
+      "title": "单选组",
+      "description": "在互斥选项中选择一种审批方式。",
+      "categories": [
+        "表单与选择"
+      ],
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/radio-group.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/resizable",
+      "type": "registry:ui",
+      "title": "可拖动分栏",
+      "description": "拖动中间分隔线，或聚焦后用方向键调整。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "cn@^0.5.2",
+        "react-resizable-panels@^4.21.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/resizable.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/resizable.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -13336,6 +14790,37 @@
           "path": "src/components/ui/slider.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/slider.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/spinner",
+      "type": "registry:ui",
+      "title": "加载指示器",
+      "description": "显示短操作的加载状态。",
+      "categories": [
+        "浮层与反馈"
+      ],
+      "dependencies": [
+        "cn@^0.5.2",
+        "lucide-react@^1.70.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/spinner.tsx"
         },
         {
           "path": "src/library/styles.css",
@@ -13634,6 +15119,36 @@
           "path": "src/components/ui/trace.tsx",
           "type": "registry:ui",
           "target": "@components/arc-workbench/components/ui/trace.tsx"
+        },
+        {
+          "path": "src/library/styles.css",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/library/styles.css"
+        }
+      ],
+      "docs": "在 Tailwind CSS 入口加入 @import \"@/components/arc-workbench/library/styles.css\";"
+    },
+    {
+      "name": "ui/typography",
+      "type": "registry:ui",
+      "title": "排版",
+      "description": "统一标题、正文、引用、列表和行内代码。",
+      "categories": [
+        "布局与内容"
+      ],
+      "dependencies": [
+        "cn@^0.5.2"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/LICENSE-shadcn.txt",
+          "type": "registry:file",
+          "target": "@components/arc-workbench/components/ui/LICENSE-shadcn.txt"
+        },
+        {
+          "path": "src/components/ui/typography.tsx",
+          "type": "registry:ui",
+          "target": "@components/arc-workbench/components/ui/typography.tsx"
         },
         {
           "path": "src/library/styles.css",

@@ -9,7 +9,8 @@
 在已初始化 shadcn Base UI 的 React 19 + Tailwind CSS 4 项目中，按需安装单件或组合包。
 
 ```sh
-npx shadcn@latest add axgiroud312-byte/arc-workbench/coding-kit#v0.1.0
+npx shadcn@latest add axgiroud312-byte/arc-workbench/coding-kit#v0.2.0
+npx shadcn@latest add axgiroud312-byte/arc-workbench/ui/data-table#v0.2.0
 npx shadcn@latest list axgiroud312-byte/arc-workbench
 ```
 
@@ -37,12 +38,19 @@ export default function Example() {
 
 | 安装项 | 内容 |
 | --- | --- |
-| `foundation` | 40 个 Base UI 基础件，包括表单、浮层、侧栏、消息滚动、代码和轨迹 |
-| `chat-kit` | 对话、输入框、模型、问卷、附件、引用和推理摘要 |
-| `coding-kit` | 完整编程工作台、子 Agent 编排、文件与测试、审批、侧栏和设置 |
-| `agent-kit` | 运行、任务、审批、服务、知识库、配置和评测 |
+| `foundation` | 67 个基础件，包括布局、导航、表单、图表、浮层、消息滚动和轨迹 |
+| `chat-kit` | 对话、输入框、模型、附件拖放、回复分支和反馈 |
+| `coding-kit` | 完整编程工作台、子 Agent 编排、文件与测试、审批、网页和产物预览 |
+| `agent-kit` | 运行、任务、流程图、审批、服务、知识库和评测 |
 
-59 个业务组件分为「对话与输入」「推理与上下文」「编程与执行」「AI 工作流」「Agent 管理」。每个组件有独立预览、安装命令和使用示例。基础件可通过 `ui/button`、`ui/message-scroller` 等名称单独安装。
+66 个业务组件和本版新增的 27 个基础件都有独立中文预览、安装命令和使用示例。基础件可通过 `ui/button`、`ui/data-table`、`ui/date-picker` 等名称单独安装。
+
+## 组件来源
+
+- 基础件补齐了 shadcn Base UI 目录中的布局、菜单、表单、图表和浮层，加入了日期选择器、可排序数据表和排版等组合用法。抽屉、命令面板、验证码和表单校验采用 Base UI 原语，通知使用库里已有的 Toast。 [shadcn/ui 基础组件](https://ui.shadcn.com/docs/components/base/accordion) · [Base UI](https://base-ui.com/react/overview/quick-start)
+- 对话分支、回复反馈和 Agent 流程图参考了 assistant-ui，用本库的 Base UI 控件重新实现。 [对话分支](https://www.assistant-ui.com/elements/message-branches) · [回复反馈](https://www.assistant-ui.com/elements/feedback-dialog) · [流程图](https://www.assistant-ui.com/elements/flow-graph)
+- 生成网页和产物查看器参考了 Vercel AI Elements，演示使用内置网页和报告。 [Web Preview](https://elements.ai-sdk.dev/components/web-preview) · [Artifact](https://elements.ai-sdk.dev/components/artifact)
+- 流式回复播放和附件拖放区参考了 Prompt Kit。回复在浏览器内逐段显示，选择文件后可以查看和移除本地附件。 [Prompt Kit](https://github.com/ibelick/prompt-kit)
 
 ## 本地开发
 
@@ -94,7 +102,10 @@ src/components/blocks/chat-elements/   独立对话组件和预览
 src/components/blocks/coding-agent/    编程对话记录、侧栏、设置和组合面板
 src/components/blocks/eval-suite.tsx   评测组件
 src/components/ui/                    shadcn/ui 基础组件
-src/registry.ts                       组件目录与用法
+src/library/catalog.ts               业务组件目录与用法
+src/library/foundation.ts            基础组件目录
+src/library/foundation/              基础组件中文预览
+src/registry.ts                      预览加载
 src/App.tsx                           组件浏览器
 src/index.css                         主题和页面样式
 ```
@@ -107,4 +118,4 @@ npm run typecheck
 
 开发预览直接运行源码，不需要先生成 `dist`。需要自行部署时再运行 `npm run build`。
 
-shadcn 的审批示例使用 AI SDK 继续执行工具。本项目用本地演示实现同样的等待、批准和拒绝流程。Base UI 的 Command 注册项仍使用 `cmdk`，项目中闲置的 Command 组件已随其 Radix 依赖移除。
+shadcn 的审批示例使用 AI SDK 继续执行工具。本项目用本地演示实现同样的等待、批准和拒绝流程。shadcn 的 Command 示例使用 `cmdk`。这里的 `CommandPalette` 由 Base UI Dialog 和 Combobox 组合，接受命令列表和选中回调。

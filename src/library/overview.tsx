@@ -25,6 +25,9 @@ import {
   librarySections,
   registryHome,
 } from "./catalog"
+import { foundationCatalog } from "./foundation"
+
+const catalog = [...blockCatalog, ...foundationCatalog]
 
 function InstallSnippet({ label, value }: { label: string; value: string }) {
   return (
@@ -73,7 +76,9 @@ export function LibraryOverview() {
         </div>
         <div className="grid min-w-0 gap-3 lg:grid-cols-2">
           {libraryKits.map((kit) => {
-            const preview = blockCatalog.find((item) => item.id === kit.preview)
+            const preview =
+              catalog.find((item) => item.id === kit.preview) ??
+              foundationCatalog[0]
             return (
               <Card key={kit.id} className="min-w-0 gap-3">
                 <CardHeader>
@@ -88,15 +93,10 @@ export function LibraryOverview() {
                       "self-start"
                     )}
                     href={
-                      preview
-                        ? "#/" +
-                          preview.category.toLowerCase() +
-                          "/" +
-                          preview.id
-                        : registryHome + "/tree/main/src/components/ui"
+                      "#/" + preview.category.toLowerCase() + "/" + preview.id
                     }
                   >
-                    {preview ? "查看预览" : "浏览基础组件"}
+                    {kit.preview ? "查看预览" : "浏览基础组件"}
                     <ArrowUpRight data-icon="inline-end" />
                   </a>
                 </CardContent>
@@ -114,7 +114,7 @@ export function LibraryOverview() {
         </div>
         <div className="grid min-w-0 gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {Object.entries(librarySections).map(([id, title]) => {
-            const entries = blockCatalog.filter((item) => item.section === id)
+            const entries = catalog.filter((item) => item.section === id)
             const first = entries[0]
             return (
               <a

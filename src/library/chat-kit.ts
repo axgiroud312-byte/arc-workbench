@@ -12,6 +12,12 @@ export { Reasoning } from "../components/blocks/chat-elements/reasoning"
 export { Shimmer } from "../components/blocks/chat-elements/shimmer"
 export { Sources } from "../components/blocks/chat-elements/sources"
 export { Suggestion } from "../components/blocks/chat-elements/suggestion"
+export { FileDropzone } from "../components/blocks/chat-elements/file-dropzone"
+export { MessageBranches } from "../components/blocks/chat-elements/message-branches"
+export type { MessageBranch } from "../components/blocks/chat-elements/message-branches"
+export { MessageFeedback } from "../components/blocks/chat-elements/message-feedback"
+export type { MessageFeedbackValue } from "../components/blocks/chat-elements/message-feedback"
+export { ResponseStream } from "../components/blocks/chat-elements/response-stream"
 export {
   Message,
   MessageContent,
